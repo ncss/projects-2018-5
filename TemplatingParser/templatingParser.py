@@ -18,31 +18,33 @@ class GroupNode(Node):
         self._children.append(child)
 
 
-fileBlob = ""
-tokenList = []
-with open("template.html") as file:
-    fileBlob = file.read()
+def splitFile(fileLocation):
 
+    fileBlob = ""
+    tokenList = []
+    with open(fileLocation) as file:
+        fileBlob = file.read()
 
-def addBlock(searchObj):
-    tokenList.append(fileBlob[:searchObj.start()])
-    tokenList.append(fileBlob[searchObj.start():searchObj.end()])
-    return fileBlob[searchObj.end():]
+    def addBlock(searchObj):
+        tokenList.append(fileBlob[:searchObj.start()])
+        tokenList.append(fileBlob[searchObj.start():searchObj.end()])
+        return fileBlob[searchObj.end():]
 
-
-while fileBlob != "":
-    exprSearch = re.search(r"{{.*?}}", fileBlob)
-    pySearch = re.search(r"{%.*?%}", fileBlob)
-    if exprSearch is not None and pySearch is not None:
-        if exprSearch.start() < pySearch.start():
+    while fileBlob != "":
+        exprSearch = re.search(r"{{.*?}}", fileBlob)
+        pySearch = re.search(r"{%.*?%}", fileBlob)
+        if exprSearch is not None and pySearch is not None:
+            if exprSearch.start() < pySearch.start():
+                fileBlob = addBlock(exprSearch)
+            else:
+                fileBlob = addBlock(pySearch)
+        elif exprSearch is not None:
             fileBlob = addBlock(exprSearch)
-        else:
+        elif pySearch is not None:
             fileBlob = addBlock(pySearch)
-    elif exprSearch is not None:
-        fileBlob = addBlock(exprSearch)
-    elif pySearch is not None:
-        fileBlob = addBlock(pySearch)
-    else:
-        tokenList.append(fileBlob)
-        fileBlob = ""
-print(tokenList)
+        else:
+            tokenList.append(fileBlob)
+            fileBlob = ""
+    return tokenList
+
+# TODO: GroupNode with parse function, other node types with appropriate constructors.
