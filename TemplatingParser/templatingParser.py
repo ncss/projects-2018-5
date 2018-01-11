@@ -47,28 +47,28 @@ class GroupNode(Node):
             if re.match(r"{{.*?}}", tokenList[0]) is not None:
                 # Expression node
                 self.addChild(ExprNode(tokenList.pop(0)))
-            elif re.match(r"{% if.*%}", tokenList[0]) is not None:
+            elif re.match(r"{% *if +.* *%}", tokenList[0]) is not None:
                 # If node
                 node = IfNode(tokenList.pop(0))
                 self.addChild(node)
                 node.block.parse(tokenList)
-            elif re.match(r"{% end if[ ]*%}", tokenList[0]) is not None:
+            elif re.match(r"{% *end +if *%}", tokenList[0]) is not None:
                 # NOTE: end if is dropped.
                 if self.isRoot:
                     raise SyntaxError("Unmatched end if token")
                 tokenList.pop(0)
                 return None
-            elif re.match(r"{% for.+in.+%}", tokenList[0]) is not None:
+            elif re.match(r"{% *for +.+ +in +.+%}", tokenList[0]) is not None:
                 # For node
                 node = ForNode(tokenList.pop(0))
                 self.addChild(node)
                 node.block.parse(tokenList)
-            elif re.match(r"{% end for[ ]*%}", tokenList[0]) is not None:
+            elif re.match(r"{% *end +for *%}", tokenList[0]) is not None:
                 if self.isRoot:
                     raise SyntaxError("Unmatched end for token")
                 tokenList.pop(0)
                 return None
-            elif re.match(r"{% include[ ].*%}", tokenList[0]) is not None:
+            elif re.match(r"{% *include +.*%}", tokenList[0]) is not None:
                 self.addChild(IncNode(tokenList.pop(0)))
             elif re.match(r"{%.*%}", tokenList[0]) is not None:
                 raise SyntaxError("Unknown token")
@@ -111,14 +111,20 @@ def splitFile(fileLocation):
 
 # TODO: GroupNode with parse function, other node types with appropriate constructors.
 root = GroupNode(True)
-root.parse(splitFile("../TestCase2.Moana"))
+root.parse(splitFile("../TestCase1.Moana"))
+
+recursionLevel = 0
 
 
-def printNodeContent(nodes):
-    for i in nodes:
-        print(i.content, end="")
-        if type(i) is IfNode or type(i) is ForNode:
-            printNodeContent(i.block.children)
+def printNodeContent(node, level):
+    tabLevel = level
+    print("\t"*tabLevel, node)
+    for child in node.children:
+        print("\t"*(tabLevel+1), child)
+        if type(child) is IfNode or type(child) is ForNode:
+            tabLevel += 1
+            printNodeContent(child.block, tabLevel)
+            tabLevel -= 1
 
 
-printNodeContent(root.children)
+printNodeContent(root, recursionLevel)
