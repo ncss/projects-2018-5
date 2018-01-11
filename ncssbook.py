@@ -3,7 +3,7 @@ from tornado.ncss import Server
 
 
 def index(response):
-    response.write('<h1>Hello my dudes</h1><p>from <span style="color: red;">Group 5</span></p>')
+    response.write('<h1>Hello fellow students</h1><p>from <span style="color: #cccccc;">Group 5</span></p>')
 
 
 server = Server()
