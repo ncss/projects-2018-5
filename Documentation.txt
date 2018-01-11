@@ -29,18 +29,19 @@ E.g.
 
 
 
-
-
-
 Interacting with the Database:
+
+If a function has //<function name>// it is not planed to be in the mvp of the product.
 
 person
 A class that contains the user's username, //password//, likes, dislikes, //friends//
 
 
 person.name()
-Returns the current users username (Str)
-
+Returns the current users username, you may pass the argument "ALL"(see e.g.) (Str)
+E.g.
+>>>person.name("ALL")
+["James", "Bob", "Sophie"]
 
 person.nameFind(<Str>)
 Returns if that username (<Str>) is in the database (Bool)
@@ -76,7 +77,7 @@ music
 A class that contains the music, and the music’s tags, name, album, and //other metadata//
 
 
-music.album(<Str>)
+//music.album(<Str>)//
 Returns the album of the song imputed (Str)
 E.g.
 >>>music.album(“music2”)
@@ -91,17 +92,17 @@ E.g.
 
 
 //music.title()//
-THIS FUNCTION IS NOT AVAILABLE UNTIL I FIGURE OUT HOW YOU WILL CALL IT
+Returns the name of the song that is playing (Str)
 
 
-music.tags(<Str>)
+//music.tags(<Str>)//
 Returns a list of the songs (<Str>) tags (list of str)
 E.g.
 >>>music.tags(“music1”)
 [“Rock”,”Pop”]
 
 
-music.randmusic()
+music.randMusic()
 Returns a random song (file)
 
 
