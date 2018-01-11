@@ -1,5 +1,6 @@
 import re
 
+
 class Node:
     def __init__(self):
         pass
@@ -9,8 +10,10 @@ class TextNode(Node):
     def __init__(self, statement):
         self.text = statement
 
+
 class ExprNode(Node):
     reg = re.compile(r'^\{\{ +(.+) +\}\}')
+
     def __init__(self, statement, context):
         self.parse(statement)
         self.context = context
@@ -24,19 +27,22 @@ class ExprNode(Node):
         else:
             translation = eval(self.context[self.expression])
         return translation
-        
+
 
 class IncNode(Node):
     reg = re.compile(r'^\{\% +include +(.+)\%\}')
+
     def __init__(self, statement, context):
         self.parse(statement)
         self.context = context
-        
+
     def parse(self, statement):
         self.filename = IncNode.reg.search(statement).group(1)
 
+
 class IfNode(Node):
     reg = re.compile(r'^\{\% +if +(.+) +\%\}')
+
     def __init__(self, statement, context):
         self.block = GroupNode(False)
         self.parse(statement)
@@ -45,8 +51,10 @@ class IfNode(Node):
     def parse(self, statement):
         self.condition = IfNode.reg.search(statement).group(1)
 
+
 class ForNode(Node):
     reg = re.compile(r'^\{\% +for +(.+) +in +(.+) +\%\}')
+
     def __init__(self, statement, context):
         self.block = GroupNode(False)
         self.parse(statement)
@@ -56,8 +64,9 @@ class ForNode(Node):
         self.variable = ForNode.reg.search(statement).group(1)
         self.iterable = ForNode.reg.search(statement).group(2)
 
+
 class GroupNode(Node):
-    def __init__(self, isRoot, context = {}):
+    def __init__(self, isRoot, context={}):
         self.children = []
         self.isRoot = isRoot
         self.context = context
