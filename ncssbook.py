@@ -11,9 +11,17 @@ def index(response):
 def style_guide(response):
     response.write('''
 <!DOCTYPE html>
+<head>
+<link href="/static/css/styleguide.css" rel="stylesheet"/>
+</head>
 <body>
 <h1> Style Guide </h1>
 <a href="/">Home</a>
+
+<h1>This is a level 1 heading.</h1>
+<h2>This is a level 2 heading.</h2>
+<p>This is a paragraph.</p> 
+
 </body>
 
 
