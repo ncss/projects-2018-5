@@ -1,42 +1,66 @@
 import re
 
-
 class Node:
     def __init__(self):
         pass
 
 
 class TextNode(Node):
-    def __init__(self, text):
-        self.content = text
-
+    def __init__(self, statement):
+        self.text = statement
 
 class ExprNode(Node):
-    def __init__(self, expression):
-        self.content = expression
+    reg = re.compile(r'^\{\{ +(.+) +\}\}')
+    def __init__(self, statement, context):
+        self.parse(statement)
+        self.context = context
 
+    def parse(self, statement):
+        self.expression = ExprNode.reg.search(statement).group(1)
+
+    def translate(self):
+        if self.expression not in self.context:
+            raise Exception("Expression is not in the context")
+        else:
+            translation = eval(self.context[self.expression])
+        return translation
+        
 
 class IncNode(Node):
-    def __init__(self, content):
-        self.content = content
-
+    reg = re.compile(r'^\{\% +include +(.+)\%\}')
+    def __init__(self, statement, context):
+        self.parse(statement)
+        self.context = context
+        
+    def parse(self, statement):
+        self.filename = IncNode.reg.search(statement).group(1)
 
 class IfNode(Node):
-    def __init__(self, statement):
+    reg = re.compile(r'^\{\% +if +(.+) +\%\}')
+    def __init__(self, statement, context):
         self.block = GroupNode(False)
-        self.content = statement
+        self.parse(statement)
+        self.context = context
 
+    def parse(self, statement):
+        self.condition = IfNode.reg.search(statement).group(1)
 
 class ForNode(Node):
-    def __init__(self, statement):
+    reg = re.compile(r'^\{\% +for +(.+) +in +(.+) +\%\}')
+    def __init__(self, statement, context):
         self.block = GroupNode(False)
-        self.content = statement
+        self.parse(statement)
+        self.context = context
 
+    def parse(self, statement):
+        self.variable = ForNode.reg.search(statement).group(1)
+        self.iterable = ForNode.reg.search(statement).group(2)
 
 class GroupNode(Node):
-    def __init__(self, isRoot):
+    def __init__(self, isRoot, context = {}):
         self.children = []
         self.isRoot = isRoot
+        self.context = context
 
     def addChild(self, child):
         self.children.append(child)
