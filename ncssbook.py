@@ -7,6 +7,10 @@ def index(response):
     <a href="/style-guide">Style Guide Here</a>
     <p>from <span style="color: #cccccc;">Group 5</span></p>''')
 
+def profile(response):
+    with open("templates/profile.html") as f:
+        response.write(f.read())
+
 def style_guide(response):
     response.write('''
 <!DOCTYPE html>
@@ -19,7 +23,7 @@ def style_guide(response):
 
 <h1>This is a level 1 heading.</h1>
 <h2>This is a level 2 heading.</h2>
-<p>This is a paragraph.</p> 
+<p>This is a paragraph.</p>
 
 </body>
 
@@ -28,5 +32,6 @@ def style_guide(response):
 
 server = Server()
 server.register('/', index)
+server.register('/profile', profile)
 server.register('/style-guide',style_guide)
 server.run()
