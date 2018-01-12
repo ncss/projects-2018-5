@@ -36,3 +36,4 @@ INSERT INTO votes VALUES (1, 'up'),
 (9, 'up'),
 (10, 'down')
 ;
+
