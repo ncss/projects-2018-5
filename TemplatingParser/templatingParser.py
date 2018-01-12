@@ -150,7 +150,6 @@ class GroupNode(Node):
 
 
 def splitFile(fileLocation):
-
     fileBlob = ""
     tokenList = []
     with open(fileLocation) as file:
@@ -178,6 +177,13 @@ def splitFile(fileLocation):
             fileBlob = ""
     return tokenList
 
+
+def translateToHTML(filename, context):
+    root = GroupNode(True, context)
+    root.parse(splitFile(filename))
+    return root.translate()
+
+
 '''
 # NOTE GroupNode construct
 root = GroupNode(True)
@@ -195,7 +201,8 @@ def printNodeContent(node, level):
             tabLevel += 1
             printNodeContent(child.block, tabLevel)
             tabLevel -= 1
-'''
+
+
 def test():
     root = GroupNode(True,context= {'name':'Jason','age':'16','title':'mr.'})
     root.parse(splitFile("../TestCase1.Moana"))
@@ -203,6 +210,5 @@ def test():
     file.write(root.translate())
     file.close()
     
-test()
+
 #printNodeContent(root, recursionLevel)
-'''
