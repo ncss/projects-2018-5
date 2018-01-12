@@ -14,21 +14,21 @@
   </audio>
   -->
     <audio id = "audioPlayer" controls="controls"
-      src="mp3/NeverGonnaGiveYouUp.mp3">
+      src="../mp3/paradise_coldplay.mp3">
       Your browser does not support the <code>audio</code> element.
     </audio>
     <script>document.getElementById('test').innerHTML = 'fdasdfas'</script>
+
+
     <script>
     let audio = document.getElementById('audioPlayer');
-    // console.log(audio.duration);
-    // let songLength = audio.currentTime;
-    // let start = Math.floor(songLength / 2);
-    // console.log(songLength,start)
-    audio.currentTime =  60;
+    audio.currentTime = 60;
     audio.play();
-    if (audio.currentTime === 70) {
-      audio.pause();
-    }
+    audio.addEventListener("loadedmetadata",function() {
+      setTimeout(function(){
+        audio.pause();
+      },15000)
+    })
     </script>
   </body>
 </html>
