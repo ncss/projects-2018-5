@@ -1,3 +1,42 @@
-body{
-  color:red;
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color:#FFFFFF
+}
+
+a {
+  color: #FF5200;
+  text-decoration: none;
+}
+
+header {
+  height: 100%;
+  padding: 20px;
+  background-color: #141414;
+  color: white;
+  margin: -8px;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+h2 {
+
+}
+
+h3 {
+
+}
+
+ul {
+  list-style-type: circle;
+}
+
+ol {
+  list-style-type: lower-roman;
+}
+
+.material-icons {
+  color: #FF5200;
+  font-size: 100px;
 }
