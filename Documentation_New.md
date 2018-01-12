@@ -1,37 +1,55 @@
-Template Language:
+# Team Five Documentation
+---
+## Template Language
 
-{{ expr }}
+The engine is the `templatingEngine.py` file. You should include this file in your python files using `import templatingEngine` at the top of your file. This is assuming that the engine is in the same directory as your own Python file. If you need to be in a different directory and still access the engine, talk to Jack or James (tutor).
+
+To then use the engine, you call `templatingEngine.translateToHTML("filename", {context})` replacing _filename_ with the filename of the html you want to parse, **relative to the `templatingEngine.py` file.** Context is a dictionary of all the variables you want to be able to use in your html file.
+
+This function then returns a **string**. This is the completed html which should be returned as the page response.
+
+### Syntax
+
+### `{{ expr }}`
 
 This will output the result of a python expression.
 E.g.
+>````html
 <h1>{{ Person.name }}<h1>
+````
 
-
-{% include <path> %}
+### `{% include <path> %}`
 This will include another HTML file in place of this line.
 E.g.
+>````
 {% include header.html %}
+````
 
 
-{% if <statement> %} X {% end if %}
+### `{% if <statement> %} X {% end if %}`
 This will act as an if statement block. X will only be executed if the statement evaluates to true.
 E.g.
-{% if Person.hasFriends %} {{ Person.name }} has {{ len(Person.friends) }} friends! {% end if %}
+>````
+{% if Person.hasFriends %}
+   {{ Person.name }} has {{ len(Person.friends) }} friends!
+{% end if %}
+````
 
 
-{% for <var> in <count> %} X {% end for %}
-This will act as an for statement block. X will executed a number of times. Var is a temporary variable which will start at 0 and count up everytime X is executed till it reaches count.
+### `{% for <var> in <iterator> %} X {% end for %}`
+This will act as an for statement block. X will executed (and therefore printed/repeated) a number of times. `var` Loops through the iterator, just like a regular for loop in Python.
 E.g.
-{% for friend in Person.friends %} <li class=’friend’>{% include friend.html %}</li> {% end for %}
+>````html
+{% for friend in Person.friends %}
+   <li class=’friend’>
+      {% include friend.html %}
+   </li>
+{% end for %}
+ ````
 
+---
 
-
-
-
----------------------------------------EVERYTHING IS WRONG NEEDS UPDATE---------------------------------------------
-
-
-Interacting with the Database:
+## Interacting with the Database:
 
 If a function has //<function name>// it is not planed to be in the mvp of the product.
 
