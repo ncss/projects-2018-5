@@ -2,9 +2,9 @@
 ---
 ## Template Language
 
-The engine is the `templatingEngine.py` file. You should include this file in your python files using `import templatingEngine` at the top of your file. This is assuming that the engine is in the same directory as your own Python file. If you need to be in a different directory and still access the engine, talk to Jack or James (tutor).
+The engine is the `templatingParser.py` file. You should include this file in your python files using `import templatingEngine` at the top of your file. This is assuming that the engine is in the same directory as your own Python file. If you need to be in a different directory and still access the engine, talk to Jack or James (tutor).
 
-To then use the engine, you call `templatingEngine.translateToHTML("filename", {context})` replacing _filename_ with the filename of the html you want to parse, **relative to the `templatingEngine.py` file.** Context is a dictionary of all the variables you want to be able to use in your html file.
+To then use the engine, you call `templatingEngine.translateToHTML("filename", {context})` replacing _filename_ with the filename of the html you want to parse, **relative to the `templatingParser.py` file.** Context is a dictionary of all the variables you want to be able to use in your html file.
 
 This function then returns a **string**. This is the completed html which should be returned as the page response.
 
