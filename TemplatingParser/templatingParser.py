@@ -26,7 +26,7 @@ class ExprNode(Node):
 
     def translate(self):
         if self.expression not in self.context:
-            raise Exception("Expression is not in the context")
+            raise Exception("Variable is not in the context")
         translation = eval(self.expression, {}, self.context)
         return translation
 
