@@ -25,8 +25,6 @@ class ExprNode(Node):
         self.expression = ExprNode.reg.search(statement).group(1)
 
     def translate(self):
-        print("ExprNode")
-        print(self.context)
         try:
             translation = eval(self.expression, {}, self.context)
             return translation
@@ -46,7 +44,7 @@ class IncNode(Node):
 
     def translate(self):
         textBlob = ""
-        with open(self.filename) as myFile:
+        with open("templates/" + self.filename) as myFile:
             for i in myFile:
                 textBlob += i
         return textBlob
@@ -70,6 +68,7 @@ class IfNode(Node):
                 self.block.context = self.context
                 self.block.passContextToChildren()
                 return self.block.translate()
+            return ""
         except NameError:
             raise NameError('The value was not in context')
 
@@ -88,8 +87,6 @@ class ForNode(Node):
 
     def translate(self):
         try:
-            print("ForNode")
-            print(self.context)
             forLoopIterable = eval(self.iterable, {}, self.context)
             forLoopLength = len(forLoopIterable)
             forNodeText = ''
@@ -154,7 +151,6 @@ class GroupNode(Node):
             child.context = self.context
 
     def translate(self):
-        print(self.context)
         finalOut = ""
         for child in self.children:
             finalOut += child.translate()
