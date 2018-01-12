@@ -21,6 +21,7 @@ def profile(response):
     writeResponse(response, 'templates/profile.html')
 
 def home(response):
+    #NOTE Import JSON file as context(??)
     context = {
         "music" : {
             "title" : "SuperAwesomeSong",

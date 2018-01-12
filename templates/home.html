@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <head>
+  <script></script>
 <Title>Song Player</Title>
 <link href="/static/css/home.css" rel="stylesheet" />
 <link href="/static/css/styleguide.css" rel="stylesheet" />
@@ -12,10 +13,10 @@
 <h2><a href="/"> Return to Index</a></h2>
 <h1>{{ music["title"] }}</h1>
 <ul>
-    <li>{{ music["title"] }}</li>
-    <li>{{ music["artist"] }}</li>
-    <li>{{ music["album"] }}</li>
-    <li>{{ music["tags"] }}</li>
+    <li id = 'musicTitle'>{{ music["title"] }}</li>
+    <li id = 'musicArtist'>{{ music["artist"] }}</li>
+    <li id = 'musicAlbum'>{{ music["album"] }}</li>
+    <li id = 'musticTags'>{{ music["tags"] }}</li>
 </ul>
 <figure>
     <figcaption>This will be Album Cover</figcaption>
