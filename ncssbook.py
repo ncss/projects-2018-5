@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from tornado.ncss import Server
-
+from TemplatingParser import templatingParser
 
 def index(response):
     response.write('''<h1>Hello fellow students</h1>
@@ -14,14 +14,14 @@ def index(response):
     </ul>
     ''')
 
+def writeResponse(response, filename, context={}):
+    response.write(templatingParser.translateToHTML(filename, context))
 
 def profile(response):
-    with open('templates/profile_page.html') as f:
-        response.write(f.read())
+    writeResponse(response, 'templates/profile_page.html')
 
 def profile(response):
-    with open("templates/profile.html") as f:
-        response.write(f.read())
+    writeResponse(response, 'templates/profile.html')
 
 def style_guide(response):
     response.write('''
