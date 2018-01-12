@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
   <header>
-    <h1>
+    <h1 id ="test">
     THIS IS THE AUDIO PLAYER
     </h1>
   </header>
@@ -14,10 +14,21 @@
   </audio>
   -->
     <audio id = "audioPlayer" controls="controls"
-      src="C:\Users\ssom4121\Desktop\mp3\Havana.mp3"
-      autoplay>
+      src="mp3/NeverGonnaGiveYouUp.mp3">
       Your browser does not support the <code>audio</code> element.
     </audio>
-    <script src="audiojs.js"></script>
+    <script>document.getElementById('test').innerHTML = 'fdasdfas'</script>
+    <script>
+    let audio = document.getElementById('audioPlayer');
+    // console.log(audio.duration);
+    // let songLength = audio.currentTime;
+    // let start = Math.floor(songLength / 2);
+    // console.log(songLength,start)
+    audio.currentTime =  60;
+    audio.play();
+    if (audio.currentTime === 70) {
+      audio.pause();
+    }
+    </script>
   </body>
 </html>
