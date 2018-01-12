@@ -15,8 +15,9 @@ img {
 h3 {
   text-align: center;
 }
+
 .name {
-  padding-top: 45px;
+  padding-top: 15px;
   font-size: 70px;
   grid-column-start: 2;
   grid-column-end: 12;
@@ -57,9 +58,23 @@ h3 {
   background-color: lightblue;
 }
 
-.l_title {
+.l_title .d_title{
   grid-column-start: 3;
   grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+
+.l_artist .d_artist{
+  grid-column-start: 4;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+
+.l_time .d_time{
+  grid-column-start: 5;
+  grid-column-end: 5;
   grid-row-start: 2;
   grid-row-end: 2;
 }
