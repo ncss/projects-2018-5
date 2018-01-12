@@ -16,7 +16,7 @@
         </li>
         {% end for %}
       {% end for %}
-    {% end for %}
+   {% end for %}
   </ul>
 <section>
 {% include footer.html %}
