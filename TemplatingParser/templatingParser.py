@@ -1,5 +1,5 @@
 import re
-
+import html
 
 class Node:
     def __init__(self):
@@ -27,9 +27,10 @@ class ExprNode(Node):
     def translate(self):
         try:
             translation = eval(self.expression, {}, self.context)
-            return translation
         except NameError:
             raise NameError('The value was not in context')
+        else:
+            return html.escape(translation)
 
 
 class IncNode(Node):
