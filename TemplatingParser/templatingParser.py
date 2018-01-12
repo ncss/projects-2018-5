@@ -26,13 +26,14 @@ class ExprNode(Node):
 
     def translate(self):
         if self.expression not in self.context:
+            print(self.expression, self.context)
             raise Exception("Variable is not in the context")
         translation = eval(self.expression, {}, self.context)
         return translation
 
 
 class IncNode(Node):
-    reg = re.compile(r'^\{\% +include +(.+)\%\}')
+    reg = re.compile(r'^\{\% +include +(.+?) +\%\}')
 
     def __init__(self, statement, context):
         self.parse(statement)
@@ -84,10 +85,11 @@ class ForNode(Node):
     def translate(self):
         if self.iterable not in self.context:
             raise Exception("Given iterable was not in context")
+        print(self.context)
         forLoopIterable = eval(self.iterable, {}, self.context)
         forLoopLength = len(forLoopIterable)
         forNodeText = ''
-        for i in forLoopLength:
+        for i in range(forLoopLength):
             self.context[self.variable] = forLoopIterable[i]
             self.block.context = self.context
             forNodeText += self.block.translate()
