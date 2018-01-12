@@ -1,4 +1,5 @@
 import re
+import html
 
 
 class Node:
@@ -15,7 +16,7 @@ class TextNode(Node):
 
 
 class ExprNode(Node):
-    reg = re.compile(r'^\{\{ +(.+) +\}\}')
+    reg = re.compile(r'^\{\{ +(.+?) +\}\}')
 
     def __init__(self, statement, context):
         self.parse(statement)
@@ -27,9 +28,10 @@ class ExprNode(Node):
     def translate(self):
         try:
             translation = eval(self.expression, {}, self.context)
-            return translation
         except NameError:
             raise NameError('The value was not in context')
+        else:
+            return html.escape(translation)
 
 
 class IncNode(Node):
@@ -44,14 +46,14 @@ class IncNode(Node):
 
     def translate(self):
         textBlob = ""
-        with open(self.filename) as myFile:
+        with open("templates/" + self.filename) as myFile:
             for i in myFile:
                 textBlob += i
         return textBlob
 
 
 class IfNode(Node):
-    reg = re.compile(r'^\{\% +if +(.+) +\%\}')
+    reg = re.compile(r'^\{\% +if +(.+?) +\%\}')
 
     def __init__(self, statement, context):
         self.block = GroupNode(False, context)
@@ -63,15 +65,18 @@ class IfNode(Node):
 
     def translate(self):
         try:
-            check = bool(eval(self.expression, {}, self.context))
+            check = bool(eval(self.condition, {}, self.context))
             if check is True:
+                self.block.context = self.context
+                self.block.passContextToChildren()
                 return self.block.translate()
+            return ""
         except NameError:
             raise NameError('The value was not in context')
-            
+
 
 class ForNode(Node):
-    reg = re.compile(r'^\{\% +for +(.+) +in +(.+) +\%\}')
+    reg = re.compile(r'^\{\% +for +(.+?) +in +(.+?) +\%\}')
 
     def __init__(self, statement, context):
         self.block = GroupNode(False)
@@ -87,9 +92,10 @@ class ForNode(Node):
             forLoopIterable = eval(self.iterable, {}, self.context)
             forLoopLength = len(forLoopIterable)
             forNodeText = ''
-            for i in forLoopLength:
+            for i in range(forLoopLength):
                 self.context[self.variable] = forLoopIterable[i]
                 self.block.context = self.context
+                self.block.passContextToChildren()
                 forNodeText += self.block.translate()
             return forNodeText
         except NameError:
@@ -108,31 +114,31 @@ class GroupNode(Node):
     def parse(self, tokenSplit):
         tokenList = tokenSplit
         while tokenList != []:
-            if re.match(r"{{.*?}}", tokenList[0]) is not None:
+            if re.match(r"\{\{ +(.+?) +\}\}", tokenList[0]) is not None:
                 # Expression node
                 self.addChild(ExprNode(tokenList.pop(0), self.context))
-            elif re.match(r"{% *if +.* *%}", tokenList[0]) is not None:
+            elif re.match(r"\{\% +if +.* +\%\}", tokenList[0]) is not None:
                 # If node
                 node = IfNode(tokenList.pop(0), self.context)
                 self.addChild(node)
                 node.block.parse(tokenList)
-            elif re.match(r"{% *end +if *%}", tokenList[0]) is not None:
+            elif re.match(r"\{\% +end +if +\%\}", tokenList[0]) is not None:
                 # NOTE: end if is dropped.
                 if self.isRoot:
                     raise SyntaxError("Unmatched end if token")
                 tokenList.pop(0)
                 return None
-            elif re.match(r"{% *for +.+ +in +.+%}", tokenList[0]) is not None:
+            elif re.match(r"\{\% +for +.+ +in +.+ +\%\}", tokenList[0]) is not None:
                 # For node
                 node = ForNode(tokenList.pop(0), self.context)
                 self.addChild(node)
                 node.block.parse(tokenList)
-            elif re.match(r"{% *end +for *%}", tokenList[0]) is not None:
+            elif re.match(r"{% +end +for +%}", tokenList[0]) is not None:
                 if self.isRoot:
                     raise SyntaxError("Unmatched end for token")
                 tokenList.pop(0)
                 return None
-            elif re.match(r"{% *include +.*%}", tokenList[0]) is not None:
+            elif re.match(r"{% +include +.* +%}", tokenList[0]) is not None:
                 self.addChild(IncNode(tokenList.pop(0), self.context))
             elif re.match(r"{%.*%}", tokenList[0]) is not None:
                 raise SyntaxError("Unknown token")
@@ -141,6 +147,10 @@ class GroupNode(Node):
 
         if not self.isRoot:
             raise SyntaxError("Missing closing For or If token")
+
+    def passContextToChildren(self):
+        for child in self.children:
+            child.context = self.context
 
     def translate(self):
         finalOut = ""
@@ -190,7 +200,6 @@ root = GroupNode(True)
 root.parse(splitFile("../TestCase1.Moana"))
 
 recursionLevel = 0
-'''
 
 def printNodeContent(node, level):
     tabLevel = level
@@ -209,6 +218,6 @@ def test():
     file = open('template.html','w')
     file.write(root.translate())
     file.close()
-    
+'''
 
-#printNodeContent(root, recursionLevel)
+# printNodeContent(root, recursionLevel)
