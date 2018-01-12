@@ -10,7 +10,7 @@ def index(response):
         <li><a href="/profile">Profile</a></li>
         <li><a href="/header">Header here</a></li>
         <li><a href="/footer">Footer here</a></li>
-        <li><a href="/footer">About page</a></li>
+        <li><a href="/about">About page</a></li>
     </ul>
     ''')
 
