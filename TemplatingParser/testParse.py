@@ -7,6 +7,6 @@ print(
         "TestCase3.htmlp", {
             "person": "foo",
             "friends": ["bar", "baz"],
-            "bo": False,
+            "bo": True,
             "something": "Chicken"
         }))
