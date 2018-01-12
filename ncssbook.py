@@ -57,21 +57,24 @@ def style_guide(response):
 def about(response):
     with open("templates/about.html") as f:
         response.write(f.read())
-        
+
 
 def song_player(response):
     response.write('''
     <!DOCTYPE html>
+    {%include header.html}
     <head>
-    <Title>Song Player </Title>
+    <Title>Song Player</Title>
     <link href="https://use.fontawesome.com/releases/v5.0.3/css/all.css" rel="stylesheet">
     </head>
     <body>
-    <h1>Song Name</h1>
     <h2><a href="/"> Return to Index</a></h2>
+    <h1>{{ Music.title() }}</h1>
     <ul>
-        <li>Song Title</li>
-        <li>Song Artist</li>
+        <li>{{ Music.title() }}</li>
+        <li>{{ Music.artist() }}</li>
+        <li>{{ Music.album() }}</li>
+        <li>{{ Music.tags() }}</li>
     </ul>
     <figure>
         <figcaption>This will be Album Cover</figcaption>
@@ -90,6 +93,7 @@ def song_player(response):
     </ul>
     <p1 style="font-size:500%;""><i class="far fa-thumbs-down"></i>   <i class="far fa-play-circle"></i>  <i class="far fa-thumbs-up"></i></p1>
     </body>
+    {% include footer.html %}
 
 
     ''')
@@ -100,9 +104,8 @@ def header(response):
 <head>
 <Title>Header</Title>
 </head>
-<body><img src=""
-alt="This will be logo">
-<h3>This will be Username</h3>
+<body><a href="/" img src="" alt="This will be logo">
+<h3>{{ Person.name() }}</h3>
 </body>
     ''')
 
@@ -113,7 +116,7 @@ def footer(response):
 <Title>Footer</Title>
 </head>
 <body>
-<p1>Whatever we are actually putting in footer</p1>
+<li><a href="/about"> About </a></li>
 </body>
     ''')
 
