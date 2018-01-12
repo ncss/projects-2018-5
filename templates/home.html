@@ -1,7 +1,12 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 
 <head>
   <script></script>
+=======
+{% include header.html %}
+<head>
+>>>>>>> refs/remotes/origin/master
 <Title>Song Player</Title>
 <link href="/static/css/home.css" rel="stylesheet" />
 <link href="/static/css/styleguide.css" rel="stylesheet" />
@@ -13,10 +18,17 @@
 <h2><a href="/"> Return to Index</a></h2>
 <h1>{{ music["title"] }}</h1>
 <ul>
+<<<<<<< HEAD
     <li id = 'musicTitle'>{{ music["title"] }}</li>
     <li id = 'musicArtist'>{{ music["artist"] }}</li>
     <li id = 'musicAlbum'>{{ music["album"] }}</li>
     <li id = 'musticTags'>{{ music["tags"] }}</li>
+=======
+    <li>{{ music["title"] }}</li>
+    <li>{{ music["artist"] }}</li>
+    <li>{{ music["album"] }}</li>
+    <li>{{ music["tags"] }}</li>
+>>>>>>> refs/remotes/origin/master
 </ul>
 <figure>
     <figcaption>This will be Album Cover</figcaption>
@@ -36,3 +48,7 @@
 <button><i class="material-icons">thumb_down</i></button>
 <button><i class="material-icons">thumb_up</i></button>
 </body>
+<<<<<<< HEAD
+=======
+{% include footer.html %}
+>>>>>>> refs/remotes/origin/master
