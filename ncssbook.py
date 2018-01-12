@@ -4,19 +4,10 @@ from tornado.ncss import Server
 
 def index(response):
     response.write('''<h1>Hello fellow students</h1>
-<<<<<<< HEAD
     <a href="/style-guide">Style Guide Here</a>
     <a href="/song-player">Song Player Here</a>
     <a href="/header">Header here</a>
     <a href="/footer">Footer here</a>
-=======
-    <form action="/style-guide">
-        <input type="submit" value="Style Guide Here" />
-    </form>
-    <form action="/song-player">
-        <input type="submit" value="Song Player Here" />
-    </form>
->>>>>>> origin/Song-Page
     <p>from <span style="color: #cccccc;">Group 5</span></p>''')
 
 def style_guide(response):
