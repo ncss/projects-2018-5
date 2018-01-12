@@ -1,1 +1,6 @@
 /* css for the profile page goes here */
+#grid {
+  display: grid;
+  grid-template-columns: 16.667% 16.667% 16.667% 16.667% 16.667% 16.667%;
+  grid-template-rows: 50% 50%;
+}
