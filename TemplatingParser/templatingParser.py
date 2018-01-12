@@ -10,6 +10,9 @@ class TextNode(Node):
     def __init__(self, statement):
         self.text = statement
 
+    def translate(self):
+        return self.text
+
 
 class ExprNode(Node):
     reg = re.compile(r'^\{\{ +(.+) +\}\}')
@@ -38,6 +41,13 @@ class IncNode(Node):
 
     def parse(self, statement):
         self.filename = IncNode.reg.search(statement).group(1)
+
+    def translate(self):
+        textBlob = ""
+        with open(self.filename) as myFile:
+            for i in myFile:
+                textBlob += i
+        return textBlob
 
 
 class IfNode(Node):
@@ -79,10 +89,10 @@ class GroupNode(Node):
         while tokenList != []:
             if re.match(r"{{.*?}}", tokenList[0]) is not None:
                 # Expression node
-                self.addChild(ExprNode(tokenList.pop(0)))
+                self.addChild(ExprNode(tokenList.pop(0), self.context))
             elif re.match(r"{% *if +.* *%}", tokenList[0]) is not None:
                 # If node
-                node = IfNode(tokenList.pop(0))
+                node = IfNode(tokenList.pop(0), self.context)
                 self.addChild(node)
                 node.block.parse(tokenList)
             elif re.match(r"{% *end +if *%}", tokenList[0]) is not None:
@@ -93,7 +103,7 @@ class GroupNode(Node):
                 return None
             elif re.match(r"{% *for +.+ +in +.+%}", tokenList[0]) is not None:
                 # For node
-                node = ForNode(tokenList.pop(0))
+                node = ForNode(tokenList.pop(0), self.context)
                 self.addChild(node)
                 node.block.parse(tokenList)
             elif re.match(r"{% *end +for *%}", tokenList[0]) is not None:
@@ -102,14 +112,20 @@ class GroupNode(Node):
                 tokenList.pop(0)
                 return None
             elif re.match(r"{% *include +.*%}", tokenList[0]) is not None:
-                self.addChild(IncNode(tokenList.pop(0)))
+                self.addChild(IncNode(tokenList.pop(0), self.context))
             elif re.match(r"{%.*%}", tokenList[0]) is not None:
                 raise SyntaxError("Unknown token")
             else:
-                self.addChild(TextNode(tokenList.pop(0)))
+                self.addChild(TextNode(tokenList.pop(0), self.context))
 
         if not self.isRoot:
             raise SyntaxError("Missing closing For or If token")
+
+    def translate(self):
+        finalOut = ""
+        for child in self.children:
+            finalOut += child.translate()
+        return finalOut
 
 
 def splitFile(fileLocation):
@@ -142,7 +158,7 @@ def splitFile(fileLocation):
     return tokenList
 
 
-# TODO: GroupNode with parse function, other node types with appropriate constructors.
+# NOTE GroupNode construct
 root = GroupNode(True)
 root.parse(splitFile("../TestCase1.Moana"))
 
