@@ -27,8 +27,7 @@ class ExprNode(Node):
     def translate(self):
         if self.expression not in self.context:
             raise Exception("Expression is not in the context")
-        else:
-            translation = eval(self.context[self.expression])
+        translation = eval(self.expression, {}, self.context)
         return translation
 
 
@@ -54,12 +53,20 @@ class IfNode(Node):
     reg = re.compile(r'^\{\% +if +(.+) +\%\}')
 
     def __init__(self, statement, context):
-        self.block = GroupNode(False)
+        self.block = GroupNode(False, context)
         self.parse(statement)
         self.context = context
 
     def parse(self, statement):
         self.condition = IfNode.reg.search(statement).group(1)
+
+    def translate(self):
+        if self.expression not in self.context:
+            raise Exception("Expression is not in the context")
+        check = bool(eval(self.expression, {}, self.context))
+        if check is True:
+            return self.block.translate()
+        return ""
 
 
 class ForNode(Node):
@@ -73,6 +80,18 @@ class ForNode(Node):
     def parse(self, statement):
         self.variable = ForNode.reg.search(statement).group(1)
         self.iterable = ForNode.reg.search(statement).group(2)
+
+    def translate(self):
+        if self.iterable not in self.context:
+            raise Exception("Given iterable was not in context")
+        forLoopIterable = eval(self.iterable, {}, self.context)
+        forLoopLength = len(forLoopIterable)
+        forNodeText = ''
+        for i in forLoopLength:
+            self.context[self.variable] = forLoopIterable[i]
+            self.block.context = self.context
+            forNodeText += self.block.translate()
+        return forNodeText
 
 
 class GroupNode(Node):
@@ -116,7 +135,7 @@ class GroupNode(Node):
             elif re.match(r"{%.*%}", tokenList[0]) is not None:
                 raise SyntaxError("Unknown token")
             else:
-                self.addChild(TextNode(tokenList.pop(0), self.context))
+                self.addChild(TextNode(tokenList.pop(0)))
 
         if not self.isRoot:
             raise SyntaxError("Missing closing For or If token")
