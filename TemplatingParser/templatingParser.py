@@ -25,10 +25,11 @@ class ExprNode(Node):
         self.expression = ExprNode.reg.search(statement).group(1)
 
     def translate(self):
-        if self.expression not in self.context:
-            raise Exception("Expression is not in the context")
-        translation = eval(self.expression, {}, self.context)
-        return translation
+        try:
+            translation = eval(self.expression, {}, self.context)
+            return translation
+        except NameError:
+            raise NameError('The value was not in context')
 
 
 class IncNode(Node):
@@ -61,13 +62,13 @@ class IfNode(Node):
         self.condition = IfNode.reg.search(statement).group(1)
 
     def translate(self):
-        if self.expression not in self.context:
-            raise Exception("Expression is not in the context")
-        check = bool(eval(self.expression, {}, self.context))
-        if check is True:
-            return self.block.translate()
-        return ""
-
+        try:
+            check = bool(eval(self.expression, {}, self.context))
+            if check is True:
+                return self.block.translate()
+        except NameError:
+            raise NameError('The value was not in context')
+            
 
 class ForNode(Node):
     reg = re.compile(r'^\{\% +for +(.+) +in +(.+) +\%\}')
@@ -82,16 +83,17 @@ class ForNode(Node):
         self.iterable = ForNode.reg.search(statement).group(2)
 
     def translate(self):
-        if self.iterable not in self.context:
-            raise Exception("Given iterable was not in context")
-        forLoopIterable = eval(self.iterable, {}, self.context)
-        forLoopLength = len(forLoopIterable)
-        forNodeText = ''
-        for i in forLoopLength:
-            self.context[self.variable] = forLoopIterable[i]
-            self.block.context = self.context
-            forNodeText += self.block.translate()
-        return forNodeText
+        try:
+            forLoopIterable = eval(self.iterable, {}, self.context)
+            forLoopLength = len(forLoopIterable)
+            forNodeText = ''
+            for i in forLoopLength:
+                self.context[self.variable] = forLoopIterable[i]
+                self.block.context = self.context
+                forNodeText += self.block.translate()
+            return forNodeText
+        except NameError:
+            raise NameError('The value was not in context')
 
 
 class GroupNode(Node):
@@ -176,13 +178,13 @@ def splitFile(fileLocation):
             fileBlob = ""
     return tokenList
 
-
+'''
 # NOTE GroupNode construct
 root = GroupNode(True)
 root.parse(splitFile("../TestCase1.Moana"))
 
 recursionLevel = 0
-
+'''
 
 def printNodeContent(node, level):
     tabLevel = level
@@ -193,6 +195,14 @@ def printNodeContent(node, level):
             tabLevel += 1
             printNodeContent(child.block, tabLevel)
             tabLevel -= 1
-
-
-printNodeContent(root, recursionLevel)
+'''
+def test():
+    root = GroupNode(True,context= {'name':'Jason','age':'16','title':'mr.'})
+    root.parse(splitFile("../TestCase1.Moana"))
+    file = open('template.html','w')
+    file.write(root.translate())
+    file.close()
+    
+test()
+#printNodeContent(root, recursionLevel)
+'''
