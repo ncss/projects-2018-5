@@ -45,7 +45,7 @@ def style_guide(response):
         <li>Nicky</li>
         <li>Bruce</li>
     </ul>
-    <i class="material-icons mats">thumb_down</i>
+    <i class="material-icons">thumb_down</i>
     <i class="material-icons">thumb_up</i>
     <i class="material-icons">pause</i>
     <i class="material-icons">play_arrow</i>
@@ -66,6 +66,8 @@ def song_player(response):
     <head>
     <Title>Song Player</Title>
     <link href="https://use.fontawesome.com/releases/v5.0.3/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     </head>
     <body>
     <h2><a href="/"> Return to Index</a></h2>
@@ -91,7 +93,8 @@ def song_player(response):
         <li>Billy</li>
         <li>Bob</li>
     </ul>
-    <p1 style="font-size:500%;""><i class="far fa-thumbs-down"></i>   <i class="far fa-play-circle"></i>  <i class="far fa-thumbs-up"></i></p1>
+    <button><i class="material-icons">thumb_down</i></button>
+    <button><i class="material-icons">thumb_up</i></button>
     </body>
     {% include footer.html %}
 
@@ -104,7 +107,8 @@ def header(response):
 <head>
 <Title>Header</Title>
 </head>
-<body><a href="/" img src="" alt="This will be logo">
+<body>
+<a href="/" img src="" alt="This will be logo">
 <h3>{{ Person.name() }}</h3>
 </body>
     ''')
