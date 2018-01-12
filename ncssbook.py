@@ -3,7 +3,18 @@ from tornado.ncss import Server
 
 
 def index(response):
-    response.write('<h1>Hello fellow students</h1><p>from <span style="color: #cccccc;">Group 5</span></p>')
+    response.write('''<h1>Hello fellow students</h1>
+    <ul>
+        <li><a href="/style-guide">Style Guide</a></li>
+        <li><a href="/song-player">Song Player</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/header">Header here</a></li>
+        <li><a href="/footer">Footer here</a></li>
+        <li><a href="/footer">About page</a></li>
+    </ul>
+    ''')
+
+
 def profile(response):
     with open('templates/profile_page.html') as f:
         response.write(f.read())
