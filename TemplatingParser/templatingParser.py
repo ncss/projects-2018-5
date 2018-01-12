@@ -178,7 +178,7 @@ def splitFile(fileLocation):
     return tokenList
 
 
-def translateToHTML(filename, context):
+def translateToHTML(filename, context={}):
     root = GroupNode(True, context)
     root.parse(splitFile(filename))
     return root.translate()
