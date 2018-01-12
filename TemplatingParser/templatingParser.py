@@ -15,7 +15,7 @@ class TextNode(Node):
 
 
 class ExprNode(Node):
-    reg = re.compile(r'^\{\{ +(.+) +\}\}')
+    reg = re.compile(r'^\{\{ +(.+?) +\}\}')
 
     def __init__(self, statement, context):
         self.parse(statement)
@@ -51,7 +51,7 @@ class IncNode(Node):
 
 
 class IfNode(Node):
-    reg = re.compile(r'^\{\% +if +(.+) +\%\}')
+    reg = re.compile(r'^\{\% +if +(.+?) +\%\}')
 
     def __init__(self, statement, context):
         self.block = GroupNode(False, context)
@@ -74,7 +74,7 @@ class IfNode(Node):
 
 
 class ForNode(Node):
-    reg = re.compile(r'^\{\% +for +(.+) +in +(.+) +\%\}')
+    reg = re.compile(r'^\{\% +for +(.+?) +in +(.+?) +\%\}')
 
     def __init__(self, statement, context):
         self.block = GroupNode(False)
@@ -112,31 +112,31 @@ class GroupNode(Node):
     def parse(self, tokenSplit):
         tokenList = tokenSplit
         while tokenList != []:
-            if re.match(r"{{.*?}}", tokenList[0]) is not None:
+            if re.match(r"\{\{ +(.+?) +\}\}", tokenList[0]) is not None:
                 # Expression node
                 self.addChild(ExprNode(tokenList.pop(0), self.context))
-            elif re.match(r"{% *if +.* *%}", tokenList[0]) is not None:
+            elif re.match(r"\{\% +if +.* +\%\}", tokenList[0]) is not None:
                 # If node
                 node = IfNode(tokenList.pop(0), self.context)
                 self.addChild(node)
                 node.block.parse(tokenList)
-            elif re.match(r"{% *end +if *%}", tokenList[0]) is not None:
+            elif re.match(r"\{\% +end +if +\%\}", tokenList[0]) is not None:
                 # NOTE: end if is dropped.
                 if self.isRoot:
                     raise SyntaxError("Unmatched end if token")
                 tokenList.pop(0)
                 return None
-            elif re.match(r"{% *for +.+ +in +.+%}", tokenList[0]) is not None:
+            elif re.match(r"\{\% +for +.+ +in +.+ +\%\}", tokenList[0]) is not None:
                 # For node
                 node = ForNode(tokenList.pop(0), self.context)
                 self.addChild(node)
                 node.block.parse(tokenList)
-            elif re.match(r"{% *end +for *%}", tokenList[0]) is not None:
+            elif re.match(r"{% +end +for +%}", tokenList[0]) is not None:
                 if self.isRoot:
                     raise SyntaxError("Unmatched end for token")
                 tokenList.pop(0)
                 return None
-            elif re.match(r"{% *include +.*%}", tokenList[0]) is not None:
+            elif re.match(r"{% +include +.* +%}", tokenList[0]) is not None:
                 self.addChild(IncNode(tokenList.pop(0), self.context))
             elif re.match(r"{%.*%}", tokenList[0]) is not None:
                 raise SyntaxError("Unknown token")
