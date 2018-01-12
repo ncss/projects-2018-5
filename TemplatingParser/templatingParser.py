@@ -33,7 +33,7 @@ class ExprNode(Node):
 
 
 class IncNode(Node):
-    reg = re.compile(r'^\{\% +include +(.+)\%\}')
+    reg = re.compile(r'^\{\% +include +(.+?) +\%\}')
 
     def __init__(self, statement, context):
         self.parse(statement)
