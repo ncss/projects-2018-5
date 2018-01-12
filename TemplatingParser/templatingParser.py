@@ -68,7 +68,7 @@ class IfNode(Node):
                 return self.block.translate()
         except NameError:
             raise NameError('The value was not in context')
-            
+
 
 class ForNode(Node):
     reg = re.compile(r'^\{\% +for +(.+) +in +(.+) +\%\}')
@@ -190,7 +190,6 @@ root = GroupNode(True)
 root.parse(splitFile("../TestCase1.Moana"))
 
 recursionLevel = 0
-'''
 
 def printNodeContent(node, level):
     tabLevel = level
@@ -209,6 +208,6 @@ def test():
     file = open('template.html','w')
     file.write(root.translate())
     file.close()
-    
+'''
 
-#printNodeContent(root, recursionLevel)
+# printNodeContent(root, recursionLevel)
