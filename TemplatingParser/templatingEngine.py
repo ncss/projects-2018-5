@@ -25,6 +25,8 @@ class ExprNode(Node):
         self.expression = ExprNode.reg.search(statement).group(1)
 
     def translate(self):
+        print("ExprNode")
+        print(self.context)
         try:
             translation = eval(self.expression, {}, self.context)
             return translation
@@ -63,8 +65,10 @@ class IfNode(Node):
 
     def translate(self):
         try:
-            check = bool(eval(self.expression, {}, self.context))
+            check = bool(eval(self.condition, {}, self.context))
             if check is True:
+                self.block.context = self.context
+                self.block.passContextToChildren()
                 return self.block.translate()
         except NameError:
             raise NameError('The value was not in context')
@@ -84,12 +88,15 @@ class ForNode(Node):
 
     def translate(self):
         try:
+            print("ForNode")
+            print(self.context)
             forLoopIterable = eval(self.iterable, {}, self.context)
             forLoopLength = len(forLoopIterable)
             forNodeText = ''
-            for i in forLoopLength:
+            for i in range(forLoopLength):
                 self.context[self.variable] = forLoopIterable[i]
                 self.block.context = self.context
+                self.block.passContextToChildren()
                 forNodeText += self.block.translate()
             return forNodeText
         except NameError:
@@ -142,7 +149,12 @@ class GroupNode(Node):
         if not self.isRoot:
             raise SyntaxError("Missing closing For or If token")
 
+    def passContextToChildren(self):
+        for child in self.children:
+            child.context = self.context
+
     def translate(self):
+        print(self.context)
         finalOut = ""
         for child in self.children:
             finalOut += child.translate()

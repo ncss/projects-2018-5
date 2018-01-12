@@ -1,7 +1,9 @@
-from TemplatingParser import templatingParser
+# Example parse from a different file.
+# Try to make sure you have templatingEngine.py in the same directory.
+import templatingEngine
 
 print(
-    templatingParser.translateToHTML(
+    templatingEngine.translateToHTML(
         "TestCase3.htmlp", {
             "person": "foo",
             "friends": ["bar", "baz"],
