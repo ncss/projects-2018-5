@@ -27,6 +27,11 @@ def style_guide(response):
 
     ''')
 
+def about(response):
+    with open("templates/about.html") as f:
+        response.write(f.read())
+        
+
 def song_player(response):
     response.write('''
     <!DOCTYPE html>
@@ -96,4 +101,5 @@ server = Server()
 server.register('/', index)
 server.register('/style-guide',style_guide)
 server.register('/song-player',song_player)
+server.register('/about', about)
 server.run()
