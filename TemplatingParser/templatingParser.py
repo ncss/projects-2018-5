@@ -1,6 +1,7 @@
 import re
 import html
 
+
 class Node:
     def __init__(self):
         pass
