@@ -1,4 +1,4 @@
-# Team Five Documentation
+﻿# Team Five Documentation
 ---
 ## Template Language
 
@@ -54,10 +54,28 @@ E.g.
 If a function has //<function name>// it is not planed to be in the mvp of the product.
 
 
+
+Database.rand_music()
+Returns a random song (object)
+
+Music.title()
+Returns the name of the song that is playing (Str)
+
+Music.artist(<Str>)
+Returns the album of the song imputed (Str)
+E.g.
+>>>Music.artist(“Music2”)
+“Dave Songwriter”
+
+
+
+
+
+//ALL BELOW HERE DOES NOT EXIST//
 Person.name()
 Returns the current users username (Str)
 
-Database.name_find(<Str>)
+//Database.name_find(<Str>)//
 Returns if that username (<Str>) is in the database (Bool)
 E.g.
 >>>Person.nameFind(“James”)
@@ -98,14 +116,7 @@ E.g.
 “Music2 album”
 
 
-Music.artist(<Str>)
-Returns the album of the song imputed (Str)
-E.g.
->>>Music.artist(“Music2”)
-“Dave Songwriter”
-
-
-//Music.title()//
+Music.title()
 Returns the name of the song that is playing (Str)
 
 
@@ -115,9 +126,6 @@ E.g.
 >>>Music.tags(“Music1”)
 [“Rock”,”Pop”]
 
-
-Music.rand_music()
-Returns a random song (file)
 
 
 Music.Music(<Str>)
