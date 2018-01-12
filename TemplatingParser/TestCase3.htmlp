@@ -5,7 +5,7 @@
     {{ something }}
     {% for f in friends %}
     <li class = 'friend' >
-      {{ f }} {% if bo %} ({{ something }}) {% end if%}
+      {{ f }} {% if bo %} ({{ something }}) {% end if %}
     </li>
     {% end for %}
   </ul>
