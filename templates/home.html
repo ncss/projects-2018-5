@@ -9,29 +9,36 @@
 
 </head>
 <body>
-<h2><a href="/"> Return to Index</a></h2>
-<h1>{{ music["title"] }}</h1>
-<ul>
-    <li>{{ music["title"] }}</li>
-    <li>{{ music["artist"] }}</li>
-    <li>{{ music["album"] }}</li>
-    <li>{{ music["tags"] }}</li>
-</ul>
-<figure>
-    <figcaption>This will be Album Cover</figcaption>
-</figure>
-<h1>Users Who Liked This:</h1>
-<ul>
-    <li>Bob</li>
-    <li>Cindy</li>
-    <li>Jelly</li>
-    <li>JimJim</li>
-    <li>jamjam</li>
-    <li>Em</li>
-    <li>Sam</li>
-    <li>Billy</li>
-    <li>Bob</li>
-</ul>
-<button><i class="material-icons">thumb_down</i></button>
-<button><i class="material-icons">thumb_up</i></button>
+  <div class="page">
+    <h2><a href="/"> Return to Index</a></h2>
+    <h1>{{ music["title"] }}</h1>
+    <div class="song_info">
+      <h2>Song Information:</h2>
+      <ul>
+          <li>{{ music["title"] }}</li>
+          <li>{{ music["artist"] }}</li>
+          <li>{{ music["album"] }}</li>
+          <li>{{ music["tags"] }}</li>
+      </ul>
+    </div>
+    <figure>
+        <figcaption class="album_cover">This will be Album Cover</figcaption>
+    </figure>
+    <div class="users_liked">
+      <h2>Users Who Liked This:</h2>
+      <ul>
+          <li>Bob</li>
+          <li>Cindy</li>
+          <li>Jelly</li>
+          <li>JimJim</li>
+          <li>jamjam</li>
+          <li>Em</li>
+          <li>Sam</li>
+          <li>Billy</li>
+          <li>Bob</li>
+      </ul>
+    </div>
+    <button><i class="material-icons">thumb_down</i></button>
+    <button><i class="material-icons">thumb_up</i></button>
+  </div>
 </body>
