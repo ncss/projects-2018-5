@@ -18,100 +18,26 @@ def writeResponse(response, filename, context={}):
     response.write(templatingParser.translateToHTML(filename, context))
 
 def profile(response):
-    writeResponse(response, 'templates/profile_page.html')
-
-def profile(response):
     writeResponse(response, 'templates/profile.html')
 
-def style_guide(response):
-    response.write('''
-<!DOCTYPE html>
-<head>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500,600,800" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="/static/css/styleguide.css" rel="stylesheet"/>
-</head>
-<body>
+def home(response):
+    context = {
+        "music" : {
+            "title" : "SuperAwesomeSong",
+            "artist": "SuperAwesomeSongWriter",
+            "album" : "SuperAwesomeAlbum",
+            "tags" : "Awesome"
+        }
+    }
+    writeResponse(response, 'templates/home.html', context)
 
-    <header>
-        <h1> Style Guide </h1>
-        <a href="/">Home</a>
-    </header>
-    <div class="page">
-        <h1>This is a level 1 heading.</h1>
-        <h2>This is a level 2 heading.</h2>
-        <h3> This is a level 3 heading.</h3>
-        <p>This is a paragraph.</p>
-        <ol>
-            <li>Song 1</li>
-            <li>Song number 2</li>
-            <li>Song #3</li>
-            <li>Fourth Song</li>
-            </ol>
-            <div class="icons">
-                <i class="material-icons">thumb_down</i>
-                <i class="material-icons">thumb_up</i>
-                <i class="material-icons">pause</i>
-                <i class="material-icons">play_arrow</i>
-            </div>
-            <ul>
-            <li>Tim</li>
-            <li>James</li>
-            <li>Nicky</li>
-            <li>Bruce</li>
-            </ul>
-    </div>
-</body>
-
-
-    ''')
+def style(response):
+    writeResponse(response, 'templates/style.html')
 
 def about(response):
     with open("templates/about.html") as f:
         response.write(f.read())
 
-
-def song_player(response):
-    response.write('''
-    <!DOCTYPE html>
-    {%include header.html}
-    <head>
-    <Title>Song Player</Title>
-    <link href="https://use.fontawesome.com/releases/v5.0.3/css/all.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    </head>
-    <body>
-    <h2><a href="/"> Return to Index</a></h2>
-    <h1>{{ Music.title() }}</h1>
-    <ul>
-        <li>{{ Music.title() }}</li>
-        <li>{{ Music.artist() }}</li>
-        <li>{{ Music.album() }}</li>
-        <li>{{ Music.tags() }}</li>
-    </ul>
-    <figure>
-        <figcaption>This will be Album Cover</figcaption>
-    </figure>
-    <h1>Users Who Liked This:</h1>
-    <ul>
-        <li>Bob</li>
-        <li>Cindy</li>
-        <li>Jelly</li>
-        <li>JimJim</li>
-        <li>jamjam</li>
-        <li>Em</li>
-        <li>Sam</li>
-        <li>Billy</li>
-        <li>Bob</li>
-    </ul>
-    <button><i class="material-icons">thumb_down</i></button>
-    <button><i class="material-icons">thumb_up</i></button>
-    </body>
-    {% include footer.html %}
-
-
-    ''')
 
 def header(response):
     response.write('''
@@ -139,8 +65,8 @@ def footer(response):
 server = Server()
 server.register('/', index)
 server.register('/profile', profile)
-server.register('/style-guide',style_guide)
-server.register('/song-player',song_player)
+server.register('/style-guide',style)
+server.register('/song-player',home)
 server.register('/about', about)
 server.register('/header',header)
 server.register('/footer',footer)
