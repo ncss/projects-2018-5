@@ -2,20 +2,18 @@ import random
 import re
 import sqlite3
 
-
+#cur = sqlite3.cursor()
 class Database:
     def __init__(self):
-        con = sqlite3.connect("ncssbook.db")
-        cur = conn.cursor()
+        self.con = sqlite3.connect("ncssbook.db")
 
     def reboot(self):
-        cur.close()
-        con.close()
-        con = sqlite3.connect("ncssbook.db")
-        cur = conn.cursor()
+        self.con.close()
+        self.con = sqlite3.connect("ncssbook.db")
 
-    def rand_music():
-        pass
+    @staticmethod
+    def rand_music(musics):
+        return random.choice(musics)
         #return object of random music(that has not been played)
 
 
@@ -32,10 +30,21 @@ class Database:
 
 class Person:
 
-    def __init__(self, good, bad):
+    def __init__(self, con):
         self.name = "James" #get the current users username
-        self.good = [] #get liked song ids
-        self.bad = [] #get disliked song ids
+        self.good = []
+        self.bad = []
+        up_votes = '''SELECT title FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
+        cur = con.cursor()
+        cur.execute(up_votes)
+        for row in cur:
+            self.good.append(row)
+
+        down_votes ='''SELECT title FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
+        cur.execute(down_votes)
+        for row in cur:
+            self.bad.append(row)
+        
 
     def name(self):
         return(self.name)
@@ -46,13 +55,13 @@ class Person:
     def bad(self):
         return(self.good)
 
-    def add_song(self, vote):
-        if vote == "BAD":
+    #def add_song(self, vote):
+        #if vote == "BAD":
             #add that vote to the database
-        elif vote == "GOOD":
+        #elif vote == "GOOD":
             #add that vote to the database
-        else:
-            raise ValueError("vote should be \"BAD\" or \"GOOD\"")
+        #else:
+            #raise ValueError("vote should be \"BAD\" or \"GOOD\"")
 
     def voted_song(self, vsong):
         for songs in self.bad:
@@ -67,19 +76,20 @@ class Person:
 
 class Music:
     
-        def __init__(self):
-            self.name = #name
-            self.artist = #artist
-            self.location = #location
+        def __init__(self, name, artist, location):
+            self.title = name
+            self.artist = artist
+            self.location = location
 
-        def title(self):
-            return(self.title)
 
-        def artist(self):
-            return(self.artist)
-
-        #def music(self):
-            #return(self.location)
-
-        
-
+db = Database()
+con = db.con
+cur = con.cursor()
+musics = []
+song_details = 'SELECT * FROM songs;'
+cur.execute(song_details)
+for row in cur:
+    location = row[1]
+    name = row[2]
+    artist = row[3]
+    musics.append(Music(name,artist,location))
