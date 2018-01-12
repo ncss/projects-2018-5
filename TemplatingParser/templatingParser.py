@@ -148,7 +148,6 @@ class GroupNode(Node):
 
 
 def splitFile(fileLocation):
-
     fileBlob = ""
     tokenList = []
     with open(fileLocation) as file:
@@ -176,7 +175,14 @@ def splitFile(fileLocation):
             fileBlob = ""
     return tokenList
 
+def translateToHTML(filename, context):
+    root = GroupNode(True, context)
+    root.parse(splitFile(filename))
+    return root.translate()
 
+#print(translateToHTML("TestCase3.Moana", {"person": "foo", "friends": ["bar", "baz"], "bo": True, "something": "Chicken"}))
+    
+'''
 # NOTE GroupNode construct
 root = GroupNode(True)
 root.parse(splitFile("../TestCase1.Moana"))
@@ -196,3 +202,4 @@ def printNodeContent(node, level):
 
 
 printNodeContent(root, recursionLevel)
+'''
