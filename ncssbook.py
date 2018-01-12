@@ -35,8 +35,7 @@ def style(response):
     writeResponse(response, 'templates/style.html')
 
 def about(response):
-    with open("templates/about.html") as f:
-        response.write(f.read())
+    writeResponse(response, 'templates/about.html')
 
 
 def header(response):
