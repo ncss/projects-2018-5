@@ -52,7 +52,7 @@ class Database:
         self.cur.execute(drop_songs)
         self.cur.execute(create_songs)
         self.cur.execute(insert_songs)
-        #cur.execute(insert_votes)
+        self.cur.execute(insert_votes)
 
     def reboot(self):
         self.con.close()
@@ -63,7 +63,7 @@ class Database:
         self.cur.execute(drop_songs)
         self.cur.execute(create_songs)
         self.cur.execute(insert_songs)
-        #cur.execute(insert_votes)
+        self.cur.execute(insert_votes)
 
 
 
@@ -90,15 +90,14 @@ class Person:
         self.name = "James" #get the current users username
         self.good = []
         self.bad = []
-        
-        
+
 
     def name(self):
         return(self.name)
-    
+
     def good(self): #returns list of songs a user likes
         return(self.good)
-    
+
     def bad(self): #returns list of songs a user dislikes
         return(self.bad)
 
@@ -112,14 +111,13 @@ class Person:
 
 
 class Song:
-    
         def __init__(self, id, name, artist, location):
             self.id = id
             self.title = name
             self.artist = artist
             self.location = location
 
-        
+
 
 
 db = Database()
@@ -143,23 +141,25 @@ def vote(input):
         cur.execute('''INSERT INTO votes VALUES ({}, 'down');'''.format(input[1]))
     else:
         cur.execute('''INSERT INTO votes VALUES ({}, 'up');'''.format(input[1]))
-    up_votes = '''SELECT title FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
-    cur = con.cursor()
+        
+    up_votes = '''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
     cur.execute(up_votes)
     for row in cur:
-        person.good.append(row[0])
+        id = row[0]
+        location = row[1]
+        name = row[2]
+        artist = row[3]
+        person.good.append(Song(id,name,artist,location))
 
-    down_votes ='''SELECT title FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
+    down_votes ='''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
     cur.execute(down_votes)
     for row in cur:
-        person.bad.append(row[0])
+        id = row[0]
+        location = row[1]
+        name = row[2]
+        artist = row[3]
+        person.bad.append(Song(id,name,artist,location))
     return True #to be fixed with try catch block
 
 def get_person():
     return person
-
-
-
-
-
-
