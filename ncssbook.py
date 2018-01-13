@@ -26,6 +26,7 @@ def profile(response):
     person = API.get_person()
     liked = person.good()
     disliked = person.bad()
+    name = person.get_name()
     writeResponse(response, 'templates/profile.html', context={"liked" : liked, "disliked": disliked, "name": name})
 
 
