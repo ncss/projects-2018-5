@@ -2,6 +2,7 @@
 from tornado.ncss import Server
 from TemplatingParser import templatingParser
 
+
 def index(response):
     response.write('''<h1>Hello fellow students</h1>
     <ul>
@@ -14,25 +15,30 @@ def index(response):
     </ul>
     ''')
 
+
 def writeResponse(response, filename, context={}):
     response.write(templatingParser.translateToHTML(filename, context))
+
 
 def profile(response):
     writeResponse(response, 'templates/profile.html')
 
+
 def home(response):
     context = {
-        "music" : {
-            "title" : "SuperAwesomeSong",
+        "music": {
+            "title": "SuperAwesomeSong",
             "artist": "SuperAwesomeSongWriter",
-            "album" : "SuperAwesomeAlbum",
-            "tags" : "Awesome"
+            "album": "SuperAwesomeAlbum",
+            "tags": "Awesome"
         }
     }
     writeResponse(response, 'templates/home.html', context)
 
+
 def style(response):
     writeResponse(response, 'templates/style.html')
+
 
 def about(response):
     writeResponse(response, 'templates/about.html')
@@ -50,6 +56,7 @@ def header(response):
 </body>
     ''')
 
+
 def footer(response):
     response.write('''
 <!DOCTYPE html>
@@ -61,12 +68,25 @@ def footer(response):
 </body>
     ''')
 
+
+def vote(response):
+    user = response.get_field("user")  # simply "user" as for now
+    song = response.get_field("song")  # Song ID
+    vote = response.get_field("vote")  # 1:UP,0:DOWN
+    params = [user, song, vote]
+
+    params["success"] = True
+
+    response.write(params)
+
+
 server = Server()
 server.register('/', index)
 server.register('/profile', profile)
-server.register('/style-guide',style)
-server.register('/song-player',home)
+server.register('/style-guide', style)
+server.register('/song-player', home)
 server.register('/about', about)
-server.register('/header',header)
-server.register('/footer',footer)
+server.register('/header', header)
+server.register('/footer', footer)
+server.register('/vote', vote)
 server.run()

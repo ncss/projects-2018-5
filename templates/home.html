@@ -38,8 +38,22 @@
           <li>Bob</li>
       </ul>
     </div>
-    <button><i class="material-icons">thumb_down</i></button>
-    <button><i class="material-icons">thumb_up</i></button>
+    <button><i class="material-icons" id="voteDown">thumb_down</i></button>
+    <button><i class="material-icons" id="voteUp">thumb_up</i></button>
   </div>
+  <script>
+    downButton = document.getElementById("voteDown");
+    upButton = document.getElementById("voteUp");
+    downButton.onclick = function(){sendVote(downButton)};
+    upButton.onclick = function(){sendVote(upButton)};
+    function sendVote(button) {
+      vote = button.id == "voteUp" ? 1 : 0;
+      fetch("/vote?user=1&song=2&vote=" + vote)
+      .then((resp) => resp.json()).then(function(data) {
+        // Do what you need to move to next song
+        alert(data["success"])
+      })
+    }
+  </script>
 </body>
 {% include footer.html %}
