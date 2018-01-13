@@ -8,7 +8,7 @@
 </head>
 <body>
   {% include header.html %}
-  <div class = "page">
+  <div class="page">
     <div class="song_info">
       <div>
           <h2 id = "musicTitle">{{ music["title"] }}</h2>
@@ -41,30 +41,30 @@
     </div>
   </div>
   {% include footer.html %}
-   <script>
-    downButton = document.getElementById("voteDown");
-    upButton = document.getElementById("voteUp");
-    downButton.addEventListener('onclick',animate);
-    downButton.addEventListener('onclick', sendVote(downButton))
-    upButton.addEventListener('onclick',sendVote(upButton))
-    function sendVote(button) {
-      alert('wait this ACTUALLY worked??')
-      vote = button.id == "voteUp" ? 1 : 0;
+  <script>
+    //downButton.addEventListener('onclick',animate);
+    function sendVote(event) {
+      vote = event.target.id == "voteUp" ? 1 : 0;
       fetch("/vote?user=0&song=" + (currentSongId) + "&vote=" + vote).then(
         (resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
         nextSong();
         playNextSnippet();
         if (data["success"] == false) {
-          alert("failed");
+          console.log("failed");
         }
         const nameArray = ["Bob", "Cindy", "Jelly", "JimJim", "JamJam", "Em", "Sam", "Billy"];
         nameArray.sort(() => Math.random() * 2 - 1);
 
-        for(var i = 0; i < 5; i++) {
+        for (var i = 0; i < 5; i++) {
           document.getElementById("ulike" + i.toString()).innerHTML = nameArray[i];
         }
-      })
+      });
     }
+
+    downButton = document.getElementById("voteDown");
+    upButton = document.getElementById("voteUp");
+    downButton.addEventListener('click', sendVote);
+    upButton.addEventListener('click', sendVote);
   </script>
 </body>
