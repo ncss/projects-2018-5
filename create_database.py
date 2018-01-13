@@ -9,14 +9,14 @@ cur = conn.cursor()
 drop_votes = 'DROP TABLE IF EXISTS votes;'
 create_votes = '''
 CREATE TABLE votes (
-	song_id INTEGER,
+	song_id INTEGER UNIQUE,
 	vote TEXT
 );
 '''
 drop_songs = 'DROP TABLE IF EXISTS songs;'
 create_songs = '''
 CREATE TABLE songs (
-	id INTEGER,
+	id INTEGER UNIQUE,
 	location TEXT,
 	title TEXT,
 	artist TEXT
@@ -53,6 +53,27 @@ cur.execute(create_songs)
 cur.execute(insert_songs)
 cur.execute(insert_votes)
 
-cur.execute('SELECT * FROM songs;')
+
+song_details = 'SELECT * FROM songs;'
+cur.execute(song_details)
 for row in cur:
     print(row)
+
+
+song_location = 'SELECT location FROM songs'
+cur.execute(song_location)
+for row in cur:
+    print(row)
+
+up_votes = '''SELECT title FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
+cur.execute(up_votes)
+for row in cur:
+    print(row)
+
+down_votes ='''SELECT title FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
+cur.execute(down_votes)
+for row in cur:
+    print(row)
+
+
+

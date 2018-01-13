@@ -1,0 +1,13 @@
+{% include header.html %}
+<section id = 'profile'>
+  <h1>{{ person }}</h1>
+  <ul id = 'friends-list'>
+    {{ something }}
+    {% for f in friends %}
+    <li class = 'friend' >
+      {{ f }} {% if bo %} ({{ something }}) {% end if %}
+    </li>
+    {% end for %}
+  </ul>
+<section>
+{% include footer.html %}
