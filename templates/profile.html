@@ -12,23 +12,18 @@
 <body class='grid'>
   <div class="box">
     <img src="https://pre00.deviantart.net/67de/th/pre/i/2013/005/7/9/circle_profile_by_pdogkasper-d5qkroq.png" />
-    <h4 class='name'>Jimmy Neutron</h4>
+    <h4 class='name'>{{ get_person().name }}</h4>
   </div>
   <div class="likebox">
     <div class="icons">
         <h1 class="material-icons">thumb_up</h1>
     </div>
     <table class="l_table">
-      <tr>
-        <td class="l_name">My My My!</td>
+      {% for likedsong in get_person().good %}<tr>
+        <td class="l_name">{{ likedsong.title }}</td>
         <td>Troye Sivan</td>
         <td>12:45am</td>
-      </tr>
-      <tr>
-        <td class="l_name">Versace On The Floor</td>
-        <td>Bruno Mars</td>
-        <td>12:46am</td>
-      </tr>
+      </tr>{% end for %}
     </table>
   </div>
 
@@ -37,16 +32,11 @@
         <h1 class="material-icons">thumb_down</h1>
     </div>
     <table class="d_table">
-      <tr>
-        <td class="d_name">All About That Bass</td>
+      {% for dislikedsong in get_person().good %}<tr>
+        <td class="d_name">{{ dislikedsong.title }}</td>
         <td>Meghan Trainor</td>
         <td>2:56am</td>
-      </tr>
-      <tr>
-        <td class="d_name">Green Light</td>
-        <td>Lorde</td>
-        <td>10:45am</td>
-      </tr>
+      </tr>{% end for %}
     </table>
   </div>
 
