@@ -49,7 +49,9 @@ class IncNode(Node):
         with open("templates/" + self.filename) as myFile:
             for i in myFile:
                 textBlob += i
-        return textBlob
+
+        miniRoot = GroupNode(True, self.context)
+        return miniRoot.parse(splitBlob(textBlob))
 
 
 class IfNode(Node):
@@ -161,9 +163,16 @@ class GroupNode(Node):
 
 def splitFile(fileLocation):
     fileBlob = ""
-    tokenList = []
+
     with open(fileLocation) as file:
         fileBlob = file.read()
+
+    splitBlob(fileBlob)
+
+
+def splitBlob(blob):
+    tokenList = []
+    fileBlob = blob
 
     def addBlock(searchObj):
         tokenList.append(fileBlob[:searchObj.start()])
