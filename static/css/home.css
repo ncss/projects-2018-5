@@ -80,3 +80,16 @@ button > i.material-icons {
   .cover .material-icons{
     font-size: 50px;
   }
+
+  .pic img {
+    width:40px;
+  }
+
+  .user_like a {
+    display: inline-block;
+  }
+
+.user_like span {
+  position: relative;
+  top: -14px;
+}
