@@ -51,9 +51,11 @@
   <script>
     downButton = document.getElementById("voteDown");
     upButton = document.getElementById("voteUp");
-    downButton.onclick = function(){sendVote(downButton)};
-    upButton.onclick = function(){sendVote(upButton)};
+    downButton.addEventListener('onclick',animate);
+    downButton.addEventListener('onclick',sendVote{downButton})
+    upButton.addEventListener('onclick',sendVote{upButton})
     function sendVote(button) {
+      alert('wait this ACTUALLY worked??')
       vote = button.id == "voteUp" ? 1 : 0;
       fetch("/vote?user=0&song=2&vote=" + vote).then(
         (resp) => resp.json()).then(function(data) {
@@ -72,6 +74,8 @@
     document.getElementById("musicArtist").innerHTML = "INSERT TEXT FROM JSON HERE";
     document.getElementById("musicAlbum").innerHTML = "INSERT TEXT FROM JSON HERE";
     document.getElementById("musicTags").innerHTML = "INSERT TEXT FROM JSON HERE";
+
   }
+
 </script>
 </body>
