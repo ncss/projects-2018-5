@@ -15,7 +15,9 @@ img.big_profile_pic {
 h3 {
   text-align: center;
 }
-
+body {
+  padding-bottom: 200px;
+}
 .name {
   padding-top: 15px;
   font-size: 70px;
@@ -33,7 +35,6 @@ h3 {
 }
 
 .likebox {
-  display: grid;
   margin-top: 50px;
   margin-right: 2%;
   height: 100%;
@@ -46,7 +47,6 @@ h3 {
 }
 
 .dislikebox {
-  display: grid;
   margin-top: 50px;
   margin-left: 2%;
   height: 100%;

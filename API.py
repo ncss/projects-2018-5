@@ -15,21 +15,21 @@ CREATE TABLE songs (
     id INTEGER UNIQUE,
     location TEXT,
     title TEXT,
-    artist TEXT
+    artist TEXT,
+    album_cover TEXT
 );
 '''
-
-insert_songs = '''INSERT INTO songs VALUES (1, '.\\static\\Havana.mp3', 'Havana', 'Camilla Cabello'),
-(2, '.\\static\\Paradise.mp3', 'Paradise', 'Coldplay'),
-(3, '.\\static\\BlankSpace.mp3', 'Blank Space', 'Taylor Swift'),
-(4, '', 'Achilles Come Down', 'Gang of Youths'),
-(5, '', 'The Final Countdown', 'James Curran'),
-(6, '', 'Bohemian Rhapsody', 'Queen'),
-(7, '', 'Thunder', 'Imagine Dragons'),
-(8, '', 'Short Circuit', 'Daft Punk'),
-(9, '', 'Hotline Bling', 'Drake'),
-(10, '', 'The A Team', 'Ed Sheeran'),
-(11, '.\\static\\NeverGonnaGiveYouUp.mp3', 'Never Gonna Give You Up', 'Rick Astley');'''
+insert_songs = '''INSERT INTO songs VALUES (1, '.\\static\\mp3\\Havana.mp3', 'Havana', 'Camilla Cabello', '.\\static\\albumCovers\\Havana.png'),
+(2, '.\\static\\mp3\\Paradise.mp3', 'Paradise', 'Coldplay', '.\\static\\albumCovers\\Paradise.jpg'),
+(3, '.\\static\\mp3\\BlankSpace.mp3', 'Blank Space', 'Taylor Swift', '.\\static\\albumCovers\\BlankSpace.png'),
+(4, '', 'Achilles Come Down', 'Gang of Youths', ''),
+(5, '', 'The Final Countdown', 'James Curran', ''),
+(6, '', 'Bohemian Rhapsody', 'Queen', ''),
+(7, '', 'Thunder', 'Imagine Dragons', ''),
+(8, '', 'Short Circuit', 'Daft Punk', ''),
+(9, '', 'Hotline Bling', 'Drake', ''),
+(10, '', 'The A Team', 'Ed Sheeran', ''),
+(11, '.\\static\\mp3\\NeverGonnaGiveYouUp.mp3', 'Never Gonna Give You Up', 'Rick Astley', '.\\static\\albumCovers\\NeverGonnaGiveYouUp.jpg');'''
 
 insert_votes = '''INSERT INTO votes VALUES (1, 'up'),
 (2, 'down'),
@@ -121,11 +121,12 @@ class Person:
 
 
 class Song:
-        def __init__(self, id, name, artist, location):
+        def __init__(self, id, name, artist, location, cover):
             self.id = id
             self.title = name
             self.artist = artist
             self.location = location
+            self.cover = cover
 
 
 person = Person()
@@ -139,7 +140,8 @@ def get_all_songs():
         location = row[1]
         name = row[2]
         artist = row[3]
-        musics.append(Song(id,name,artist,location))
+        cover = row[4]
+        musics.append(Song(id,name,artist,location,cover))
     return musics
 
 def vote(input):
@@ -148,23 +150,25 @@ def vote(input):
     else:
         cur.execute('''INSERT INTO votes VALUES ({}, 'up');'''.format(input[1]))
 
-    up_votes = '''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
+    up_votes = '''SELECT id, location, title, artist, album_cover FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
     cur.execute(up_votes)
     for row in cur:
         id = row[0]
         location = row[1]
         name = row[2]
         artist = row[3]
-        person.good().append(Song(id,name,artist,location))
+        cover = row[4]
+        person.good().append(Song(id,name,artist,location,cover))
 
-    down_votes ='''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
+    down_votes ='''SELECT id, location, title, artist, album_cover FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
     cur.execute(down_votes)
     for row in cur:
         id = row[0]
         location = row[1]
         name = row[2]
         artist = row[3]
-        person.bad().append(Song(id,name,artist,location))
+        cover = row[4]
+        person.bad().append(Song(id,name,artist,location,cover))
     return True #to be fixed with try catch block
 
 

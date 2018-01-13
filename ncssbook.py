@@ -55,7 +55,7 @@ def songdb(response):
 
     for music in API.get_all_songs():
         if music.location:
-            out.append({"id" : music.id, "title": music.title, "artist": music.artist, "location": music.location})
+            out.append({"id" : music.id, "title": music.title, "artist": music.artist, "location": music.location, "coverlocation": music.cover})
 
     response.write(json.dumps(out))
 
@@ -99,7 +99,7 @@ server = Server()
 server.register('/', home)
 server.register('/profile', profile)
 server.register('/style-guide', style)
-server.register('/song-player', home)
+server.register('/song-player', index)
 server.register('/about', about)
 server.register('/header', header)
 server.register('/footer', footer)
