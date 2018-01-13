@@ -86,7 +86,7 @@ class Database:
 
 class Person:
 
-    def __init__(self, con):
+    def __init__(self):
         self.name = "James" #get the current users username
         self.good = []
         self.bad = []
@@ -154,6 +154,9 @@ def vote(input):
     for row in cur:
         person.bad.append(row[0])
     return True #to be fixed with try catch block
+
+def get_person():
+    return person
 
 
 
