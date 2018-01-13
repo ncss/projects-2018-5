@@ -1,0 +1,22 @@
+header {
+  display: grid;
+}
+
+.header-logo {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+.header-user {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+.logo {
+  height:100px;
+  width: 100px;
+}
