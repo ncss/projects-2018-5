@@ -21,10 +21,7 @@ def profile(response):
     writeResponse(response, 'templates/profile.html')
 
 def home(response):
-<<<<<<< HEAD
     #NOTE Import JSON file as context(??)
-=======
->>>>>>> refs/remotes/origin/master
     context = {
         "music" : {
             "title" : "SuperAwesomeSong",
