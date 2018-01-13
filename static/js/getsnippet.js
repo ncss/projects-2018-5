@@ -14,6 +14,7 @@
 // {'BlankSpace':{file:'Paradise.mp3'}}];
 
 function playNextSnippet() {
+  console.log("")
   let audio = document.getElementById('audioPlayer');
   audio.currentTime = (audio.duration/2) - 5;
   audio.play();
@@ -27,5 +28,5 @@ let audio = document.getElementById('audioPlayer');
 if (audio.readyState >= 1) {
   playNextSnippet();
 } else {
-  audio.addEventListener("loaded", playNextSnippet);
+  audio.addEventListener("loadeddata", playNextSnippet);
 }

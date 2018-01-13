@@ -13,10 +13,10 @@
     <div class="song_info">
       <h2>Song Information:</h2>
       <div>
-          <p>{{ music["title"] }}</p>
-          <p>{{ music["artist"] }}</p>
-          <p>{{ music["album"] }}</p>
-          <p>{{ music["tags"] }}</p>
+          <p id = "musicTitle">{{ music["title"] }}</p>
+          <p id = "musicArtist">{{ music["artist"] }}</p>
+          <p id = "musicAlbum">{{ music["album"] }}</p>
+          <p id = "musicTags">{{ music["tags"] }}</p>
       </div>
     </div>
     <div class="cover">
@@ -27,7 +27,7 @@
     <div class="users_liked">
       <div id="temporarymusicplayer">
         <audio id="audioPlayer" controls="controls"
-               src="/static/mp3/BlankSpace.mp3" preload>
+               src="/static/mp3/NeverGonnaGiveYouUp.mp3" preload autoplay>
           Your browser does not support the <code>audio</code> element.
         </audio>
       </div>
@@ -48,3 +48,15 @@
 </body>
 {% include footer.html %}
 <script src="/static/js/getsnippet.js"></script>
+
+<script>
+function changeValues(){
+  document.getElementById("musicTitle").innerHTML = "INSERT TEXT FROM JSON HERE"
+  document.getElementById("musicArtist").innerHTML = "INSERT TEXT FROM JSON HERE"
+  document.getElementById("musicAlbum").innerHTML = "INSERT TEXT FROM JSON HERE"
+  document.getElementById("musicTags").innerHTML = "INSERT TEXT FROM JSON HERE"
+
+}
+
+
+</script>
