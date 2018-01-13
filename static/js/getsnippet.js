@@ -2,7 +2,8 @@ let filePath = '/static/mp3/'
 let songs;
 let songCount = 0;
 let audio = document.getElementById('audioPlayer');
-let timeouts = [];
+let albumCover = document.getElementById('albumCover');
+let timeouts = []
 
 function playNextSnippet() {
   for (var i = 0; i < timeouts.length; i++) {
@@ -15,11 +16,8 @@ function playNextSnippet() {
   }
   audio.play();
   timeouts.push(setTimeout(function(){
-    audio.pause();
+    playNextSnippet();
   },10000));
-  timeouts.push(setTimeout(function(){
-    nextSong();
-  },20000));
 }
 
 function nextSong() {
@@ -35,14 +33,19 @@ function nextSong() {
 }
 
 function updateAudioPath(filePath) {
-  console.log(filePath)
   audio.src = filePath;
+}
+
+function updateAlbumCoverPath(filePath) {
+  albumCover.src = filePath;
 }
 
 function updateValues(songJSON){
   document.getElementById("musicTitle").innerHTML = songJSON.title;
   document.getElementById("musicArtist").innerHTML = songJSON.artist;
   updateAudioPath(songJSON.location);
+  updateAlbumCoverPath(songJSON.coverlocation);
+  console.log(songJSON.coverlocation);
 }
 
 function getSongs() {
