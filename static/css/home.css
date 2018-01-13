@@ -46,6 +46,11 @@
 
 
 }
+
+button > i.material-icons {
+   z-index: -1;
+}
+
 .cover > .music {
   grid-column: 1 / span 2;
   padding-top: 20px;
