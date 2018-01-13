@@ -23,7 +23,11 @@ def writeResponse(response, filename, context={}):
 
 
 def profile(response):
-    writeResponse(response, 'templates/profile.html', context={"person" : API.get_person()})
+    person = API.get_person()
+    liked = person.good()
+    disliked = person.bad()
+    name = person.get_name()
+    writeResponse(response, 'templates/profile.html', context={"liked" : liked, "disliked": disliked, "name": name})
 
 
 def home(response):
@@ -92,10 +96,10 @@ def vote(response):
 
 
 server = Server()
-server.register('/', index)
+server.register('/', home)
 server.register('/profile', profile)
 server.register('/style-guide', style)
-server.register('/song-player', home)
+server.register('/song-player', index)
 server.register('/about', about)
 server.register('/header', header)
 server.register('/footer', footer)

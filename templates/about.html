@@ -1,33 +1,40 @@
-  {% include header.html %}
+<!DOCTYPE html>
 <html>
-<title>About</title>
-<head>
-  <link rel="stylesheet" href="static/css/styleguide.css"/>
-  <link rel="stylesheet" href="static/css/db_schema.sql"/>
-  <link rel="stylesheet" href="static/css/about.css"/>
-</head>
-<body>
-  <div class= "grid">
-    <div class= "box_about">
-      <h3>About</h3>
-      <p>dkd ddfndf ddfndfnkdf df dfndffdndfn dfdfhidfjdfsnkdfs soidfiojfwenfwewf fefw fen efwnfewnwf fnrf fenrerfrer oen</p>
-    </div>
-    <div class= "box_listen">
-      <h3>Listen</h3>
-      <p>dkd ddfndf ddfndfnkdf df dfndffdndfn dfdfhidfjdfsnkdfs soidfiojfwenfwewf fefw fen efwnfewnwf fnrf fenrerfrer oen</p>
-    </div>
-    <div class= "box_vote">
-      <h3>Vote</h3>
-      <p>dkd ddfndf ddfndfnkdf df dfndffdndfn dfdfhidfjdfsnkdfs soidfiojfwenfwewf fefw fen efwnfewnwf fnrf fenrerfrer oen</p>
-    </div>
-    <div class= "box_update">
-      <h3>Update</h3>
-      <p>dkd ddfndf ddfndfnkdf df dfndffdndfn dfdfhidfjdfsnkdfs soidfiojfwenfwewf fefw fen efwnfewnwf fnrf fenrerfrer oen</p>
-    </div>
-    <div class= "box_profile">
-      <h3>A</h3>
-      <p>dkd ddfndf ddfndfnkdf df dfndffdndfn dfdfhidfjdfsnkdfs soidfiojfwenfwewf fefw fen efwnfewnwf fnrf fenrerfrer oen</p>
-    </div>
-  </div>
 
-  {% include footer.html %}</html>
+  <head>
+    {% include head.html %}
+    <title>About</title>
+    <link rel="stylesheet" href="static/css/styleguide.css"/>
+    <link rel="stylesheet" href="static/css/about.css"/>
+  </head>
+  <body>
+    {% include header.html %}
+    <div class="grid">
+      <div class= "box_about">
+        <h3>About</h3>
+        <p>Snippr is the latest way to find new music fast.</p>
+        <p>Snippr gives you a variety of music that has been personally selected and tailored to your taste, allowing you to discover great new tunes! This new state of the art technology will enhance the way you find music.</p>
+        <p>Create your profile and begin your journey. Snippr will supply you with 10 second snippets of songs that have been selected just for you. While listening vote thumbs up your favourite songs and thumbs down the songs you dislike. Snippr will then store these votes, which is accessible from your profile page. </p>
+        <p>Snippr was created by Group 5 of the NCSS Summer School. Group 5 has created this innovative program to supply its users with the newest and best way to find new music.</p>
+      </div>
+      <div class= "box_listen">
+        <h3>Listen</h3>
+        <p>Listen to the 10 second snippets.</p>
+      </div>
+      <div class= "box_vote">
+        <h3>Vote</h3>
+        <p>Vote thumbs up if you like the song and thumbs down if you dislike the song.</p>
+      </div>
+      <div class= "box_update">
+        <h3>Discover</h3>
+        <p>Discover and enjoy new tunes.</p>
+      </div>
+      <div class= "box_profile">
+        <h3>Profile</h3>
+        <p>Check out your profile to see the music you've liked and disliked.</p>
+      </div>
+    </div>
+
+    {% include footer.html %}
+  </body>
+</html>
