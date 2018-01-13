@@ -42,7 +42,7 @@
           <span id = "ulike{{ str(i) }}">{{ ["Bob", "JamJam", "Jelly", "Cindy", "Sam"][i] }}</span>
         </a>
         <a href="/uli{{ str(i) }}" class="pic">
-          <img class="ulp{{ str(i) }}" src="/static/images/{{ ["profile_pic.png", "profile_pic.png", "profile_pic.png", "profile_pic.png", "profile_pic.png"][i] }}" alt="profile pic">
+          <img id="ulp{{ str(i) }}" class="ulp" src="/static/images/{{ ["profile_bob.png", "profile_jamjam.png", "profile_jelly.png", "profile_cindy.png", "profile_sam.png"][i] }}" alt="profile pic">
         </a>
         </div>
         {% end for %}
@@ -71,15 +71,15 @@
           console.log("failed");
         }
         const nameArray = [
-          ["Bob", "profile_pic.png"], ["Cindy", "profile_pic.png"], ["Jelly", "profile_pic.png"],
-          ["JimJim", "profile_pic.png"], ["JamJam", "profile_pic.png"], ["Em", "profile_pic.png"],
-          ["Sam", "profile_pic.png"], ["Billy", "profile_pic.png"]
+          ["Bob", "profile_bob.png"], ["Cindy", "profile_cindy.png"], ["Jelly", "profile_jelly.png"],
+          ["JimJim", "profile_jimjim.png"], ["JamJam", "profile_jamjam.png"], ["Em", "profile_em.png"],
+          ["Sam", "profile_sam.png"], ["Billy", "profile_billy.png"], ["James", "profile_james.png"]
         ];
         nameArray.sort(() => Math.random() * 2 - 1);
 
         for(var i = 0; i < 5; i++) {
-          document.getElementById("ulike" + i.toString()).innerHTML = nameArray[0][i];
-          document.getElementById("ulp" + i.toString()).src = "/static/images/" + nameArray[0][i];
+          document.getElementById("ulike" + i.toString()).innerHTML = nameArray[i][0];
+          document.getElementById("ulp" + i.toString()).src = "/static/images/" + nameArray[i][1];
         }
       });
     }
