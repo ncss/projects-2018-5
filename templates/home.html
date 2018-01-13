@@ -35,11 +35,9 @@
     <div class="users_liked">
       <h2>Users Who Liked This:</h2>
       <ul class="user_list">
-        <li id = "ulike1">Bob</li>
-        <li id = "ulike2">JamJam</li>
-        <li id = "ulike3">Jelly</li>
-        <li id = "ulike4">Cindy</li>
-        <li id = "ulike5">Sam</li>
+        {% for i in range(5) %}
+        <li id = "ulike{{ str(i) }}">{{ ["Bob", "JamJam", "Jelly", "Cindy", "Sam"][i] }}</li>
+        {% end for %}
       </ul>
     </div>
   </div>
@@ -62,11 +60,9 @@
         const nameArray = ["Bob", "Cindy", "Jelly", "JimJim", "JamJam", "Em", "Sam", "Billy"];
         nameArray.sort(() => Math.random() * 2 - 1);
 
-        document.getElementById("ulike1").innerHTML = nameArray[0]
-        document.getElementById("ulike2").innerHTML = nameArray[1]
-        document.getElementById("ulike3").innerHTML = nameArray[2]
-        document.getElementById("ulike4").innerHTML = nameArray[3]
-        document.getElementById("ulike5").innerHTML = nameArray[4]
+        for(var i = 0; i < 5; i++) {
+          document.getElementById("ulike" + i.toString()).innerHTML = nameArray[i];
+        }
       })
     }
   </script>
