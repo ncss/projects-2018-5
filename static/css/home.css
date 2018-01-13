@@ -1,0 +1,47 @@
+.users_liked{
+  grid-column: 3;
+  text-align: right;
+  float: right;
+  padding-top: 50px;
+}
+.cover {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: center;
+  grid-column:2;
+  padding-top: 50px;
+
+}
+.cover > img {
+  grid-column: 1 / span 2;
+  width: 100%;
+  padding-bottom: 20px;
+}
+.cover > button {
+  align-self: center;
+  justify-self: center;
+}
+
+.song_info{
+  grid-column:1;
+  float: left;
+  text-align: left;
+  padding-top: 50px;
+}
+
+.page{
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.user_list{
+  list-style: none;
+  text-align: right;
+  float: right;
+  }
+  .user_list li::after {
+    content: " -";
+  }
+  .cover .material-icons{
+    font-size: 50px;
+  }

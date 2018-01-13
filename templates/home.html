@@ -12,31 +12,37 @@
 
 </head>
 <body>
-<h2><a href="/"> Return to Index</a></h2>
-<h1>{{ music["title"] }}</h1>
-<ul>
-    <li id = 'musicTitle'>{{ music["title"] }}</li>
-    <li id = 'musicArtist'>{{ music["artist"] }}</li>
-    <li id = 'musicAlbum'>{{ music["album"] }}</li>
-    <li id = 'musticTags'>{{ music["tags"] }}</li>
-</ul>
-<figure>
-    <figcaption>This will be Album Cover</figcaption>
-</figure>
-<h1>Users Who Liked This:</h1>
-<ul>
-    <li>Bob</li>
-    <li>Cindy</li>
-    <li>Jelly</li>
-    <li>JimJim</li>
-    <li>jamjam</li>
-    <li>Em</li>
-    <li>Sam</li>
-    <li>Billy</li>
-    <li>Bob</li>
-</ul>
-<button><i class="material-icons"id = 'VoteDown'>thumb_down</i></button>
-<button><i class="material-icons" id = 'VoteUp'>thumb_up</i></button>
+  <div class="page">
+    <!--<h1>{{ music["title"] }}</h1>-->
+    <div class="song_info">
+      <h2>Song Information:</h2>
+      <div>
+        <li id="musicTitle">{{ music["title"] }}</li>
+        <li id="musicArtist">{{ music["artist"] }}</li>
+        <li id="musicAlbum">{{ music["album"] }}</li>
+        <li id="musicTags">{{ music["tags"] }}</li>
+      </div>
+    </div>
+    <div class="cover">
+      <img src ="/static/images/acdc.jpg" alt="This will be Album Cover">
+      <button><i class="material-icons" id="VoteDown">thumb_down</i></button>
+      <button><i class="material-icons" id="VoteUp">thumb_up</i></button>
+    </div>
+    <div class="users_liked">
+      <h2>Users Who Liked This:</h2>
+      <ul class="user_list">
+          <li>Bob</li>
+          <li>Cindy</li>
+          <li>Jelly</li>
+          <li>JimJim</li>
+          <li>JamJam</li>
+          <li>Em</li>
+          <li>Sam</li>
+          <li>Billy</li>
+          <li>Bob</li>
+      </ul>
+    </div>
+  </div>
 </body>
 <script>
   if(document.getElementById('VoteDown').clicked == true || document.getElementById.clicked == true){
