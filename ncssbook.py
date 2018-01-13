@@ -4,6 +4,7 @@ from TemplatingParser import templatingParser
 import json
 import API
 
+
 def index(response):
     response.write('''<h1>Hello fellow students</h1>
     <ul>
@@ -16,36 +17,48 @@ def index(response):
     </ul>
     ''')
 
+
 def writeResponse(response, filename, context={}):
     response.write(templatingParser.translateToHTML(filename, context))
 
+
 def profile(response):
-    writeResponse(response, 'templates/profile.html')
+    person = API.get_person()
+    liked = person.good()
+    disliked = person.bad()
+    name = person.get_name()
+    writeResponse(response, 'templates/profile.html', context={"liked" : liked, "disliked": disliked, "name": name})
+
 
 def home(response):
     context = {
-        "music" : {
-            "title" : "SuperAwesomeSong",
+        "music": {
+            "title": "SuperAwesomeSong",
             "artist": "SuperAwesomeSongWriter",
-            "album" : "SuperAwesomeAlbum",
-            "tags" : "Awesome"
+            "album": "SuperAwesomeAlbum",
+            "tags": "Awesome"
         }
     }
     writeResponse(response, 'templates/home.html', context)
 
+
 def style(response):
     writeResponse(response, 'templates/style.html')
+
 
 def about(response):
     writeResponse(response, 'templates/about.html')
 
+
 def songdb(response):
     out = []
-    
+
     for music in API.get_all_songs():
-        out.append({"title" : music.title, "artist" : music.artist, "location" : music.location})
-    
+        if music.location:
+            out.append({"id" : music.id, "title": music.title, "artist": music.artist, "location": music.location})
+
     response.write(json.dumps(out))
+
 
 def header(response):
     response.write('''
@@ -59,6 +72,7 @@ def header(response):
 </body>
     ''')
 
+
 def footer(response):
     response.write('''
 <!DOCTYPE html>
@@ -70,13 +84,25 @@ def footer(response):
 </body>
     ''')
 
+
+def vote(response):
+    user = response.get_field("user")  # simply "user" as for now
+    song = response.get_field("song")  # Song ID
+    vote = response.get_field("vote")  # 1:UP,0:DOWN
+    params = [user, song, vote]
+    respDict = {"user": user, "song": song, "vote": vote}
+    respDict["success"] = API.vote(params)
+    response.write(respDict)
+
+
 server = Server()
 server.register('/', index)
 server.register('/profile', profile)
-server.register('/style-guide',style)
-server.register('/song-player',home)
+server.register('/style-guide', style)
+server.register('/song-player', home)
 server.register('/about', about)
-server.register('/header',header)
-server.register('/footer',footer)
-server.register('/songdb',songdb)
+server.register('/header', header)
+server.register('/footer', footer)
+server.register('/vote', vote)
+server.register('/songdb', songdb)
 server.run()

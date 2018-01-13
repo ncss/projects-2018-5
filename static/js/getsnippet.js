@@ -4,6 +4,8 @@ let songCount = 0
 let audio = document.getElementById('audioPlayer');
 
 function playNextSnippet() {
+  console.log("")
+  let audio = document.getElementById('audioPlayer');
   audio.currentTime = (audio.duration/2) - 5;
   audio.play();
   setTimeout(function(){
