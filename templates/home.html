@@ -17,19 +17,17 @@
     </div>
     <div class="cover">
       <img src ="/static/images/acdc.jpg" alt="This will be Album Cover">
-      <!-- <div id="progressBar">
-        <div id="bar">Progress</div>
-      </div> -->
+      <div class="music" id="temporarymusicplayer">
+        <audio id="audioPlayer" class = "audioPlayer"
+               src="/static/mp3/BlankSpace.mp3" preload>
+          Your browser does not support the <code>audio</code> element.
+        </audio>
+        <!-- <script src="/static/js/getsongs.js"></script> -->
+        <script src="/static/js/getsnippet.js"></script>
+
+      </div>
       <button><i class="material-icons">thumb_down</i></button>
       <button><i class="material-icons">thumb_up</i></button>
-    </div>
-    <div id="audioPlayerDiv">
-      <audio id="audioPlayer"
-      controls = "controls"
-             src="/static/mp3/BlankSpace.mp3" preload>
-        Your browser does not support the <code>audio</code> element.
-      </audio>
-      <script src="/static/js/getsnippet.js"></script>
     </div>
     <div class="users_liked">
       <h2>Users Who Liked This:</h2>
@@ -53,16 +51,29 @@
     upButton.onclick = function(){sendVote(upButton)};
     function sendVote(button) {
       vote = button.id == "voteUp" ? 1 : 0;
-      fetch("/vote?user=0&song=2&vote=" + vote)
-      .then((resp) => resp.json()).then(function(data) {
+      fetch("/vote?user=0&song=2&vote=" + vote).then(
+        (resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
 
-        console.log(data)
+        console.log(data);
         if (data["success"] == false) {
-          alert("failed")
+          alert("failed");
         }
       })
     }
+<<<<<<< HEAD
   </script> -->
 </body>
 {% include footer.html %}
+=======
+  </script>
+  <script>
+  function changeValues(){
+    document.getElementById("musicTitle").innerHTML = "INSERT TEXT FROM JSON HERE";
+    document.getElementById("musicArtist").innerHTML = "INSERT TEXT FROM JSON HERE";
+    document.getElementById("musicAlbum").innerHTML = "INSERT TEXT FROM JSON HERE";
+    document.getElementById("musicTags").innerHTML = "INSERT TEXT FROM JSON HERE";
+  }
+</script>
+</body>
+>>>>>>> 6e6693e9a29687eac6beec67d2021f948ef5d9c8
