@@ -21,8 +21,7 @@
     <table class="l_table">
       {% for likedsong in get_person().good %}<tr>
         <td class="l_name">{{ likedsong.title }}</td>
-        <td>Troye Sivan</td>
-        <td>12:45am</td>
+        <td>{{ likedsong.artist }}</td>
       </tr>{% end for %}
     </table>
   </div>
@@ -34,8 +33,7 @@
     <table class="d_table">
       {% for dislikedsong in get_person().good %}<tr>
         <td class="d_name">{{ dislikedsong.title }}</td>
-        <td>Meghan Trainor</td>
-        <td>2:56am</td>
+        <td>{{ dislikedsong.artist }}</td>
       </tr>{% end for %}
     </table>
   </div>
