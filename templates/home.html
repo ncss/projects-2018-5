@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-{% include header.html %}
 <head>
-<Title>Song Player</Title>
-<link href="https://use.fontawesome.com/releases/v5.0.3/css/all.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="/static/css/home.css" rel="stylesheet" />
-<link href="/static/css/styleguide.css" rel="stylesheet" />
+  {% include head.html %}
+  <title>Song Player</title>
+  <link href="https://use.fontawesome.com/releases/v5.0.3/css/all.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="/static/css/home.css" rel="stylesheet" />
+  <link href="/static/css/styleguide.css" rel="stylesheet" />
 </head>
 <body>
+  {% include header.html %}
   <div class="page">
-    <!--<h1>{{ music["title"] }}</h1>-->
     <div class="song_info">
       <h2>Song Information:</h2>
       <div>
@@ -27,7 +27,7 @@
           Your browser does not support the <code>audio</code> element.
         </audio>
       </div>
-      <button class="bad"id="voteDown"><i class="material-icons">thumb_down</i></button>
+      <button class="bad" id="voteDown"><i class="material-icons">thumb_down</i></button>
       <button class="good" id="voteUp"><i class="material-icons">thumb_up</i></button>
     </div>
     <div class="users_liked">
@@ -45,6 +45,8 @@
       </ul>
     </div>
   </div>
+  {% include footer.html %}
+  <script src="/static/js/getsnippet.js"></script>
   <script>
     downButton = document.getElementById("voteDown");
     upButton = document.getElementById("voteUp");
