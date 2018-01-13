@@ -56,29 +56,26 @@
     upButton.onclick = function(){sendVote(upButton)};
     function sendVote(button) {
       vote = button.id == "voteUp" ? 1 : 0;
-      fetch("/vote?user=0&song=2&vote=" + vote)
-      .then((resp) => resp.json()).then(function(data) {
+      fetch("/vote?user=0&song=2&vote=" + vote).then(
+        (resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
 
-        console.log(data)
+        console.log(data);
         if (data["success"] == false) {
-          alert("failed")
+          alert("failed");
         }
       })
     }
   </script>
-</body>
-{% include footer.html %}
-
-<script>
-function changeValues(){
-  document.getElementById("musicTitle").innerHTML = "INSERT TEXT FROM JSON HERE"
-  document.getElementById("musicArtist").innerHTML = "INSERT TEXT FROM JSON HERE"
-  document.getElementById("musicAlbum").innerHTML = "INSERT TEXT FROM JSON HERE"
-  document.getElementById("musicTags").innerHTML = "INSERT TEXT FROM JSON HERE"
-
-}
-
-
+  <script>
+  function changeValues(){
+    document.getElementById("musicTitle").innerHTML = "INSERT TEXT FROM JSON HERE";
+    document.getElementById("musicArtist").innerHTML = "INSERT TEXT FROM JSON HERE";
+    document.getElementById("musicAlbum").innerHTML = "INSERT TEXT FROM JSON HERE";
+    document.getElementById("musicTags").innerHTML = "INSERT TEXT FROM JSON HERE";
+  }
 </script>
+</body>
+
+
 
