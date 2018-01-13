@@ -33,6 +33,7 @@ text-align: left;
 
 .footer-logo {
   display: flex;
+  justify-content: center;
 }
 .footer-logo > img {
   align-self: center;
