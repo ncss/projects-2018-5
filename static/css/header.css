@@ -9,6 +9,12 @@ header {
   grid-column-end: 1;
 }
 
+.header-logo > img{
+  
+}
+.header-logo > h1{
+
+}
 .header-user {
   grid-row-start: 1;
   grid-row-end: 2;
@@ -19,4 +25,5 @@ header {
 .logo {
   height:100px;
   width: 100px;
+  padding: 10px;
 }
