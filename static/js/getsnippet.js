@@ -7,11 +7,14 @@ function playNextSnippet() {
   audio.currentTime = (audio.duration/2) - 5;
   audio.play();
   setTimeout(function(){
-    seekNextSong();
+    audio.pause();
   },10000);
+  setTimeout(function(){
+    nextSong();
+  },20000);
 }
 
-function seekNextSong() {
+function nextSong() {
   audio.pause();
   songCount += 1;
   let nextSong = songs[songCount];
