@@ -2,6 +2,7 @@
 <head>
   {% include head.html %}
   <title>Snippr</title>
+  <link href="/static/css/bar.css" rel="stylesheet" />
   <link href="/static/css/home.css" rel="stylesheet" />
 
 </head>
@@ -16,13 +17,15 @@
       </div>
     </div>
     <div class="cover">
-      <img src ="/static/images/acdc.jpg" alt="This will be Album Cover">
-      <div class="music" id="temporarymusicplayer">
-        <audio id="audioPlayer" class = "audioPlayer"
+      <img id="albumCover" src ="/static/images/acdc.jpg" alt="This will be Album Cover">
+      <div id="bar">
+        <div id="progressBar"></div>
+      </div>
+      <div class="music" id="audioPlayerDiv">
+        <audio id="audioPlayer" class="audioPlayer"
                src="/static/mp3/BlankSpace.mp3" preload>
           Your browser does not support the <code>audio</code> element.
         </audio>
-        <!-- <script src="/static/js/getsongs.js"></script> -->
         <script src="/static/js/getsnippet.js"></script>
 
       </div>
@@ -55,8 +58,8 @@
       fetch("/vote?user=0&song=2&vote=" + vote).then(
         (resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
-        nextSong()
-        playNextSnippet()
+        nextSong();
+        playNextSnippet();
         if (data["success"] == false) {
           alert("failed");
         }
@@ -70,5 +73,5 @@
     document.getElementById("musicAlbum").innerHTML = "INSERT TEXT FROM JSON HERE";
     document.getElementById("musicTags").innerHTML = "INSERT TEXT FROM JSON HERE";
   }
-</script>
+  </script>
 </body>
