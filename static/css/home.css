@@ -39,6 +39,9 @@
 
 .cover > button:hover {
   border: 4px solid black;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
 }
 .cover material-icons:hover{
   color: #E0E0E0;
@@ -95,4 +98,10 @@ button > i.material-icons {
 .user_like span {
   position: relative;
   top: -14px;
+}
+
+.emoji {
+    position: fixed;
+    transition: transform 10s;
+
 }
