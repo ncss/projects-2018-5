@@ -1,13 +1,14 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto auto;
   grid-column-gap: 50px;
   grid-row-gap: 50px;
   align-items: stretch;
   justify-items: stretch;
   padding-right: 200px;
   padding-left: 200px;
+  margin-bottom: 100px;
   /*padding: 0px 200px;*/
 }
 
@@ -21,7 +22,8 @@ h3 {
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
-  margin-top: 80px;
+  margin-top: 50px;
+  background-color: #E0E0E0;
   /*height: 400px;*/
 }
 
@@ -30,7 +32,8 @@ h3 {
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
-  margin-top: 80px;
+  margin-top: 50px;
+  background-color: #E0E0E0;
   }
 
 .box_vote {
@@ -38,7 +41,8 @@ h3 {
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
-  margin-top: 80px;
+  margin-top: 50px;
+  background-color: #E0E0E0;
   }
 
 .box_update {
@@ -46,6 +50,7 @@ h3 {
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
+  background-color: #E0E0E0;
   }
 
 .box_profile {
@@ -53,4 +58,11 @@ h3 {
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
+  background-color: #E0E0E0;
   }
+
+.material-icons {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 60px;
+}
