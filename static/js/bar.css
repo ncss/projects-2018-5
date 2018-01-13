@@ -1,0 +1,9 @@
+#bar {
+    width: 100%;
+    background-color: #E0E0E0;
+}
+#progressBar {
+    width: 1%;
+    height: 30px;
+    background-color: #FF5200;
+}
