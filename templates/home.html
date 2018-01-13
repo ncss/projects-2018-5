@@ -35,15 +35,11 @@
     <div class="users_liked">
       <h2>Users Who Liked This:</h2>
       <ul class="user_list">
-          <li>Bob</li>
-          <li>Cindy</li>
-          <li>Jelly</li>
-          <li>JimJim</li>
-          <li>JamJam</li>
-          <li>Em</li>
-          <li>Sam</li>
-          <li>Billy</li>
-          <li>Bob</li>
+        <li id = "ulike1">Bob</li>
+        <li id = "ulike2">JamJam</li>
+        <li id = "ulike3">Jelly</li>
+        <li id = "ulike4">Cindy</li>
+        <li id = "ulike5">Sam</li>
       </ul>
     </div>
   </div>
@@ -63,6 +59,14 @@
         if (data["success"] == false) {
           alert("failed");
         }
+        const nameArray = ["Bob", "Cindy", "Jelly", "JimJim", "JamJam", "Em", "Sam", "Billy"];
+        nameArray.sort(() => Math.random() * 2 - 1);
+
+        document.getElementById("ulike1").innerHTML = nameArray[0]
+        document.getElementById("ulike2").innerHTML = nameArray[1]
+        document.getElementById("ulike3").innerHTML = nameArray[2]
+        document.getElementById("ulike4").innerHTML = nameArray[3]
+        document.getElementById("ulike5").innerHTML = nameArray[4]
       })
     }
   </script>
