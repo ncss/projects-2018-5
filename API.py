@@ -45,24 +45,25 @@ insert_votes = '''INSERT INTO votes VALUES (1, 'up'),
 class Database:
     def __init__(self):
         self.con = sqlite3.connect("ncssbook.db")
-        cur = self.con.cursor()
-        cur.execute(drop_votes)
-        cur.execute(create_votes)
-        cur.execute(drop_songs)
-        cur.execute(create_songs)
-        cur.execute(insert_songs)
+        self.cur = self.con.cursor()
+        self.cur.execute(drop_votes)
+        self.cur.execute(create_votes)
+        self.cur.execute(drop_songs)
+        self.cur.execute(create_songs)
+        self.cur.execute(insert_songs)
         #cur.execute(insert_votes)
 
     def reboot(self):
         self.con.close()
         self.con = sqlite3.connect("ncssbook.db")
-        cur = self.con.cursor()
-        cur.execute(drop_votes)
-        cur.execute(create_votes)
-        cur.execute(drop_songs)
-        cur.execute(create_songs)
-        cur.execute(insert_songs)
-        #scur.execute(insert_votes)
+        self.cur = self.con.cursor()
+        self.cur.execute(drop_votes)
+        self.cur.execute(create_votes)
+        self.cur.execute(drop_songs)
+        self.cur.execute(create_songs)
+        self.cur.execute(insert_songs)
+        #cur.execute(insert_votes)
+
 
 
     @staticmethod
@@ -129,8 +130,7 @@ class Song:
 
 
 db = Database()
-con = db.con
-cur = con.cursor()
+cur = db.cur
 
 
 def get_all_songs():
@@ -149,3 +149,4 @@ def vote(input):
         cur.execute('''INSERT INTO votes VALUES ({}, 'down');'''.format(input[1]))
     else:
         cur.execute('''INSERT INTO votes VALUES ({}, 'up');'''.format(input[1]))
+
