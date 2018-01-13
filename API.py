@@ -5,30 +5,31 @@ import sqlite3
 drop_votes = 'DROP TABLE IF EXISTS votes;'
 create_votes = '''
 CREATE TABLE votes (
-	song_id INTEGER UNIQUE,
-	vote TEXT
+    song_id INTEGER,
+    vote TEXT
 );
 '''
 drop_songs = 'DROP TABLE IF EXISTS songs;'
 create_songs = '''
 CREATE TABLE songs (
-	id INTEGER UNIQUE,
-	location TEXT,
-	title TEXT,
-	artist TEXT
+    id INTEGER UNIQUE,
+    location TEXT,
+    title TEXT,
+    artist TEXT
 );
 '''
 
-insert_songs = '''INSERT INTO songs VALUES (1, '', 'Havana', 'Camilla Cabello'),
-(2, '', 'Paradise', 'Coldplay'),
-(3,  '', 'Blank Space', 'Taylor Swift'),
+insert_songs = '''INSERT INTO songs VALUES (1, '.\\static\\Havana.mp3', 'Havana', 'Camilla Cabello'),
+(2, '.\\static\\Paradise.mp3', 'Paradise', 'Coldplay'),
+(3, '.\\static\\BlankSpace.mp3', 'Blank Space', 'Taylor Swift'),
 (4, '', 'Achilles Come Down', 'Gang of Youths'),
 (5, '', 'The Final Countdown', 'James Curran'),
 (6, '', 'Bohemian Rhapsody', 'Queen'),
 (7, '', 'Thunder', 'Imagine Dragons'),
 (8, '', 'Short Circuit', 'Daft Punk'),
 (9, '', 'Hotline Bling', 'Drake'),
-(10, '', 'The A Team', 'Ed Sheeran');'''
+(10, '', 'The A Team', 'Ed Sheeran'),
+(11, '.\\static\\NeverGonnaGiveYouUp.mp3', 'Never Gonna Give You Up', 'Rick Astley');'''
 
 insert_votes = '''INSERT INTO votes VALUES (1, 'up'),
 (2, 'down'),
@@ -45,25 +46,24 @@ insert_votes = '''INSERT INTO votes VALUES (1, 'up'),
 class Database:
     def __init__(self):
         self.con = sqlite3.connect("ncssbook.db")
-        cur = self.con.cursor()
-        cur.execute(drop_votes)
-        cur.execute(create_votes)
-        cur.execute(drop_songs)
-        cur.execute(create_songs)
-        cur.execute(insert_songs)
-        #cur.execute(insert_votes)
+        self.cur = self.con.cursor()
+        self.cur.execute(drop_votes)
+        self.cur.execute(create_votes)
+        self.cur.execute(drop_songs)
+        self.cur.execute(create_songs)
+        self.cur.execute(insert_songs)
+        self.cur.execute(insert_votes)
 
     def reboot(self):
         self.con.close()
         self.con = sqlite3.connect("ncssbook.db")
-        cur = self.con.cursor()
-        cur.execute(drop_votes)
-        cur.execute(create_votes)
-        cur.execute(drop_songs)
-        cur.execute(create_songs)
-        cur.execute(insert_songs)
-        #scur.execute(insert_votes)
-
+        self.cur = self.con.cursor()
+        self.cur.execute(drop_votes)
+        self.cur.execute(create_votes)
+        self.cur.execute(drop_songs)
+        self.cur.execute(create_songs)
+        self.cur.execute(insert_songs)
+        self.cur.execute(insert_votes)
 
     @staticmethod
     def rand_music(musics):
@@ -81,33 +81,35 @@ class Database:
     #def all_names(self):
         #return()#all names in the database
 
-
+db = Database()
+cur = db.cur
 class Person:
 
-    def __init__(self, con):
-        self.name = "James" #get the current users username
-        self.good = []
-        self.bad = []
-        up_votes = '''SELECT title FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
-        cur = con.cursor()
-        cur.execute(up_votes)
-        for row in cur:
-            self.good.append(row)
+    def __init__(self):
+        self.name = "Jimmy Neutron" #get the current users username
 
-        down_votes ='''SELECT title FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
-        cur.execute(down_votes)
-        for row in cur:
-            self.bad.append(row)
-        
+    def get_name(self):
+        return self.name
 
-    def name(self):
-        return(self.name)
-    
     def good(self): #returns list of songs a user likes
-        return(self.good)
-    
+        rows = cur.execute("SELECT title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up'")
+        songs = []
+        for row in rows:
+            song = {}
+            song["title"] = row[0]
+            song["artist"] = row[1]
+            songs.append(song)
+        return songs
+
     def bad(self): #returns list of songs a user dislikes
-        return(self.bad)
+        rows = cur.execute("SELECT title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down'")
+        songs = []
+        for row in rows:
+            song = {}
+            song["title"] = row[0]
+            song["artist"] = row[1]
+            songs.append(song)
+        return songs
 
     #def add_song(self, vote):
         #if vote == "BAD":
@@ -119,29 +121,25 @@ class Person:
 
 
 class Song:
-    
-        def __init__(self, name, artist, location):
+        def __init__(self, id, name, artist, location):
+            self.id = id
             self.title = name
             self.artist = artist
             self.location = location
 
-        
 
-
-db = Database()
-con = db.con
-cur = con.cursor()
-
+person = Person()
 
 def get_all_songs():
     song_details = 'SELECT * FROM songs;'
     cur.execute(song_details)
     musics = []
     for row in cur:
+        id = row[0]
         location = row[1]
         name = row[2]
         artist = row[3]
-        musics.append(Song(name,artist,location))
+        musics.append(Song(id,name,artist,location))
     return musics
 
 def vote(input):
@@ -149,3 +147,26 @@ def vote(input):
         cur.execute('''INSERT INTO votes VALUES ({}, 'down');'''.format(input[1]))
     else:
         cur.execute('''INSERT INTO votes VALUES ({}, 'up');'''.format(input[1]))
+
+    up_votes = '''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
+    cur.execute(up_votes)
+    for row in cur:
+        id = row[0]
+        location = row[1]
+        name = row[2]
+        artist = row[3]
+        person.good().append(Song(id,name,artist,location))
+
+    down_votes ='''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
+    cur.execute(down_votes)
+    for row in cur:
+        id = row[0]
+        location = row[1]
+        name = row[2]
+        artist = row[3]
+        person.bad().append(Song(id,name,artist,location))
+    return True #to be fixed with try catch block
+
+
+def get_person():
+    return person
