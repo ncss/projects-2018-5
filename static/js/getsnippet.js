@@ -15,6 +15,7 @@ function playNextSnippet() {
     audio.currentTime = (audio.duration/2) - 5;
   }
   audio.play();
+  seconds = 0;
   timeouts.push(setTimeout(function(){
     playNextSnippet();
   },10000));
@@ -41,11 +42,19 @@ function updateAlbumCoverPath(filePath) {
 }
 
 function updateValues(songJSON){
-  document.getElementById("musicTitle").innerHTML = songJSON.title;
-  document.getElementById("musicArtist").innerHTML = songJSON.artist;
-  updateAudioPath(songJSON.location);
-  updateAlbumCoverPath(songJSON.coverlocation);
-  console.log(songJSON.coverlocation);
+  try {
+    document.getElementById("musicTitle").innerHTML = songJSON.title;
+    document.getElementById("musicArtist").innerHTML = songJSON.artist;
+    updateAudioPath(songJSON.location);
+    updateAlbumCoverPath(songJSON.coverlocation);
+  } catch(err) {
+    alert('No more songs!!!');
+    noMoreSongs();
+  }
+}
+
+function noMoreSongs() {
+  
 }
 
 function getSongs() {
