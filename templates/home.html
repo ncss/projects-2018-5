@@ -2,44 +2,49 @@
 {% include header.html %}
 <head>
 <Title>Song Player</Title>
-<link href="/static/css/home.css" rel="stylesheet" />
-<link href="/static/css/styleguide.css" rel="stylesheet" />
 <link href="https://use.fontawesome.com/releases/v5.0.3/css/all.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+<link href="/static/css/home.css" rel="stylesheet" />
+<link href="/static/css/styleguide.css" rel="stylesheet" />
 </head>
 <body>
   <div class="page">
-    <h2><a href="/"> Return to Index</a></h2>
-    <h1>{{ music["title"] }}</h1>
+    <!--<h1>{{ music["title"] }}</h1>-->
     <div class="song_info">
       <h2>Song Information:</h2>
-      <ul>
-          <li>{{ music["title"] }}</li>
-          <li>{{ music["artist"] }}</li>
-          <li>{{ music["album"] }}</li>
-          <li>{{ music["tags"] }}</li>
-      </ul>
+      <div>
+          <p>{{ music["title"] }}</p>
+          <p>{{ music["artist"] }}</p>
+          <p>{{ music["album"] }}</p>
+          <p>{{ music["tags"] }}</p>
+      </div>
     </div>
-    <figure>
-        <figcaption class="album_cover">This will be Album Cover</figcaption>
-    </figure>
+    <div class="cover">
+      <img src ="/static/images/acdc.jpg" alt="This will be Album Cover">
+      <button><i class="material-icons">thumb_down</i></button>
+      <button><i class="material-icons">thumb_up</i></button>
+    </div>
     <div class="users_liked">
+      <div id="temporarymusicplayer">
+        <audio id="audioPlayer" controls="controls"
+               src="/static/mp3/BlankSpace.mp3" preload>
+          Your browser does not support the <code>audio</code> element.
+        </audio>
+      </div>
       <h2>Users Who Liked This:</h2>
-      <ul>
+      <ul class="user_list">
           <li>Bob</li>
           <li>Cindy</li>
           <li>Jelly</li>
           <li>JimJim</li>
-          <li>jamjam</li>
+          <li>JamJam</li>
           <li>Em</li>
           <li>Sam</li>
           <li>Billy</li>
           <li>Bob</li>
       </ul>
     </div>
-    <button><i class="material-icons">thumb_down</i></button>
-    <button><i class="material-icons">thumb_up</i></button>
   </div>
 </body>
 {% include footer.html %}
+<script src="/static/js/getsnippet.js"></script>
