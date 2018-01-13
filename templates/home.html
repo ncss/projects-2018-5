@@ -8,11 +8,11 @@
 </head>
 <body>
   {% include header.html %}
-  <div class = "page">
+  <div class="page">
     <div class="song_info">
       <div>
-          <h2 id = "musicTitle">{{ music["title"] }}</h2>
-          <h3 id = "musicArtist">{{ music["artist"] }}</h3>
+          <h2 id="musicTitle">{{ music["title"] }}</h2>
+          <h3 id="musicArtist">{{ music["artist"] }}</h3>
       </div>
     </div>
     <div class="cover">
@@ -43,9 +43,7 @@
     </div>
   </div>
   {% include footer.html %}
-   <script>
-    downButton = document.getElementById("voteDown");
-    upButton = document.getElementById("voteUp");
+  <script>
     //downButton.addEventListener('onclick',animate);
     function sendVote(event) {
       console.log(event.target.className)
@@ -63,16 +61,21 @@
         nextSong();
         playNextSnippet();
         if (data["success"] == false) {
-          alert("failed");
+          console.log("failed");
         }
         const nameArray = ["Bob", "Cindy", "Jelly", "JimJim", "JamJam", "Em", "Sam", "Billy"];
         nameArray.sort(() => Math.random() * 2 - 1);
 
-        for(var i = 0; i < 5; i++) {
+        for (var i = 0; i < 5; i++) {
           document.getElementById("ulike" + i.toString()).innerHTML = nameArray[i];
         }
-      })
+      });
     }
+
+    downButton = document.getElementById("voteDown");
+    upButton = document.getElementById("voteUp");
+    downButton.addEventListener('click', sendVote);
+    upButton.addEventListener('click', sendVote);
   </script>
   <script src="/static/js/swipe.js"></script>
 </body>
