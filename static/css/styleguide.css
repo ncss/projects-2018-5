@@ -1,6 +1,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
   background-color:#FFFFFF;
+  margin: 0;
 
 }
 .page{
@@ -18,22 +19,19 @@ header {
   padding: 20px;
   background-color: #141414;
   color: white;
-  margin: -8px;
 }
 
 h1 {
   font-weight: 600;
-  text-align: center;
+
 }
 
 h2 {
-  text-align: center;
   font-weight: 500;
 
 }
 
 h3 {
-  text-align: center;
   font-weight: 400;
 }
 
@@ -48,6 +46,4 @@ ol {
 
 .material-icons {
   color:#FF5200;
-  font-size: 100px;
-
 }
