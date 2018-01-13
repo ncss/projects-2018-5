@@ -5,7 +5,7 @@
   grid-column: 1 / span 2;
 }
 #progressBar {
-  width: 1%;
+  width: 0%;
   height: 30px;
   background-color: #FF5200;
 }
