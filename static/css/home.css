@@ -15,7 +15,8 @@
 .cover > img {
   grid-column: 1 / span 2;
   width: 100%;
-  border: 4px solid #E0E0E0
+  border: 4px solid #E0E0E0;
+  box-sizing: border-box;
 }
 .cover > button {
   align-self: center;
@@ -28,7 +29,7 @@
 }
 
 .good {
-  
+
 
 
 
