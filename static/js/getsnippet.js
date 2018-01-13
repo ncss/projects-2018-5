@@ -10,16 +10,16 @@ function playNextSnippet() {
   for (var i = 0; i < timeouts.length; i++) {
     clearTimeout(timeouts[i]);
   }
-  timeouts = []
+  timeouts = [];
   let audio = document.getElementById('audioPlayer');
-  if (isFinite(audio.duration)){
+  if (isFinite(audio.duration)) {
     audio.currentTime = (audio.duration/2) - 5;
   }
   audio.play();
   seconds = 0;
-  timeouts.push(setTimeout(function(){
+  timeouts.push(setTimeout(function() {
     playNextSnippet();
-  },10000));
+  }, 10000));
 }
 
 function nextSong() {
@@ -49,7 +49,7 @@ function updateValues(songJSON){
     updateAudioPath(songJSON.location);
     updateAlbumCoverPath(songJSON.coverlocation);
   } catch(err) {
-    alert('No more songs!!!');
+    console.log('No more songs!!!');
     noMoreSongs();
   }
 }
@@ -59,9 +59,9 @@ function noMoreSongs() {
 }
 
 function getSongs() {
-  fetch('/songdb').then(function(response){
-    return response.json()
-  }).then(function(data){
+  fetch('/songdb').then(function(response) {
+    return response.json();
+  }).then(function(data) {
     songs = data;
   }).then(function() {
     let nextSong = songs[songCount];
