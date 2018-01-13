@@ -1,72 +1,56 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   grid-column-gap: 50px;
+  grid-row-gap: 50px;
+  align-items: stretch;
+  justify-items: stretch;
   padding-right: 200px;
   padding-left: 200px;
   /*padding: 0px 200px;*/
 }
 
+h3 {
+  font-weight: bold;
+}
 .box_about {
   background-color: pink;
-  grid-column-start: 1;
-  grid-column-end: 2;
   grid-row-start: 1;
-  grid-row-end: 4;
+  grid-row-end: span 2;
   padding-left: 20px;
   padding-right: 20px;
-  margin-top: 50px;
   text-align: center;
-  height: 400px;
+  margin-top: 80px;
+  /*height: 400px;*/
 }
 
 .box_listen {
   background-color: green;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 4;
   padding-left: 20px;
   padding-right: 20px;
-  margin-top: 50px;
   text-align: center;
-  height: 200px;
+  margin-top: 80px;
   }
 
 .box_vote {
   background-color: lightblue;
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 1;
-  grid-row-end: 4;
   padding-left: 20px;
   padding-right: 20px;
-  margin-top: 50px;
   text-align: center;
-  height: 200px;
+  margin-top: 80px;
   }
 
 .box_update {
   background-color: violet;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 3;
-  grid-row-end: 7;
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
-  height: 200px;
   }
 
 .box_profile {
   background-color: orange;
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 3;
-  grid-row-end: 7;
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
-  height: 200px;
   }
