@@ -18,7 +18,7 @@ function nextSong() {
   audio.pause();
   songCount += 1;
   let nextSong = songs[songCount];
-  changeAudioPath(nextSong.title);
+  updateAudioPath(nextSong.title);
   if (audio.readyState >= 1) {
     playNextSnippet();
   } else {
@@ -26,9 +26,21 @@ function nextSong() {
   }
 }
 
-function changeAudioPath(songName) {
+//To do!!!
+
+function updateAudioPath(songName) {
   audio.src = filePath + songName + '.mp3';
 }
+
+function updateArtist() {
+  return
+}
+
+function updateInfo(songJSON) {
+  updateAudioPath(songJSON.title);
+}
+
+//To do!!!
 
 function getSongs() {
   fetch('/songdb').then(function(response){
@@ -37,7 +49,7 @@ function getSongs() {
     songs = data;
   }).then(function() {
     let nextSong = songs[songCount];
-    changeAudioPath(nextSong.title);
+    updateAudioPath(nextSong.title);
     let audio = document.getElementById('audioPlayer');
     if (audio.readyState >= 1) {
       playNextSnippet();
@@ -47,4 +59,7 @@ function getSongs() {
   });
 }
 
+
+//First call gets all the songs from database into a json file
+//Songs are auto updated with music and all info!
 getSongs();
