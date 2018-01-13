@@ -8,16 +8,17 @@
 </head>
 <body>
   {% include header.html %}
-  <div class = "page">
+  <div class="page">
     <div class="song_info">
-      <h2>Song Information:</h2>
       <div>
-          <p id = "musicTitle">{{ music["title"] }}</p>
-          <p id = "musicArtist">{{ music["artist"] }}</p>
+          <h2 id="musicTitle">{{ music["title"] }}</h2>
+          <h3 id="musicArtist">{{ music["artist"] }}</h3>
       </div>
     </div>
     <div class="cover">
-      <img id="albumCover" src ="/static/images/acdc.jpg" alt="This will be Album Cover">
+      <div id='albumHolder'>
+        <img id="albumCover" src ="/static/images/acdc.jpg" alt="This will be Album Cover">
+      </div>
       <div id="bar">
         <div id="progressBar"></div>
       </div>
@@ -27,10 +28,10 @@
           Your browser does not support the <code>audio</code> element.
         </audio>
         <script src="/static/js/getsnippet.js"></script>
-
+        <script src="/static/js/customprogressbar.js"></script>
       </div>
-      <button id="voteDown"><i class="material-icons">thumb_down</i></button>
-      <button id="voteUp"><i class="material-icons">thumb_up</i></button>
+      <button id="voteDown" class="down"><i class="material-icons down">thumb_down</i></button>
+      <button id="voteUp" class="up"><i class="material-icons up">thumb_up</i></button>
     </div>
     <div class="users_liked">
       <h2>Users Who Liked This:</h2>
@@ -49,20 +50,25 @@
     </div>
   </div>
   {% include footer.html %}
-   <script>
-    downButton = document.getElementById("voteDown");
-    upButton = document.getElementById("voteUp");
-    downButton.onclick = function(){sendVote(downButton)};
-    upButton.onclick = function(){sendVote(upButton)};
-    function sendVote(button) {
-      vote = button.id == "voteUp" ? 1 : 0;
+  <script>
+    //downButton.addEventListener('onclick',animate);
+    function sendVote(event) {
+      console.log(event.target.className)
+      let voteString = "";
+      if (event.target.className.startsWith("material-icons")) {
+        voteString = event.target.className.substr(event.target.className.indexOf(" ") + 1)
+      } else {
+        voteString = event.target.className
+      }
+      vote = voteString == "up" ? 1 : 0;
+      console.log(vote)
       fetch("/vote?user=0&song=" + (currentSongId) + "&vote=" + vote).then(
         (resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
         nextSong();
         playNextSnippet();
         if (data["success"] == false) {
-          alert("failed");
+          console.log("failed");
         }
         const nameArray = [
           ["Bob", "profile_pic.png"], ["Cindy", "profile_pic.png"], ["Jelly", "profile_pic.png"],
@@ -75,7 +81,13 @@
           document.getElementById("ulike" + i.toString()).innerHTML = nameArray[0][i];
           document.getElementById("ulp" + i.toString()).src = "/static/images/" + nameArray[0][i];
         }
-      })
+      });
     }
+
+    downButton = document.getElementById("voteDown");
+    upButton = document.getElementById("voteUp");
+    downButton.addEventListener('click', sendVote);
+    upButton.addEventListener('click', sendVote);
   </script>
+  <script src="/static/js/swipe.js"></script>
 </body>
