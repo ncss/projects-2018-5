@@ -43,11 +43,16 @@
   </div>
   {% include footer.html %}
    <script>
+
     downButton = document.getElementById("voteDown");
     upButton = document.getElementById("voteUp");
+
     downButton.addEventListener('onclick',animate);
+    upButton.addEventListener('onclick',animate);
+
     downButton.addEventListener('onclick', sendVote(downButton))
     upButton.addEventListener('onclick',sendVote(upButton))
+
     function sendVote(button) {
       alert('wait this ACTUALLY worked??')
       vote = button.id == "voteUp" ? 1 : 0;
