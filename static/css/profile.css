@@ -27,7 +27,7 @@ h3 {
   display: grid;
   height: 100%;
   width: 100%;
-  background-color: #FF5200;
+  background-color: #349854;
   grid-column-start: 2;
   grid-column-end: 12;
 }
@@ -42,7 +42,7 @@ h3 {
   grid-row-start: 2;
   grid-column-end: 7;
   grid-row-end: 2;
-  background-color: #E0E0E0;
+  background-color: lightpink;
 }
 
 .dislikebox {
@@ -55,34 +55,26 @@ h3 {
   grid-row-start: 2;
   grid-column-end: 12;
   grid-row-end: 2;
-  background-color: #E0E0E0;
+  background-color: lightblue;
 }
 
-
-.l_table {
-  width: 100%;
-  padding-left: 70px;
+.l_title .d_title{
+  grid-column-start: 3;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 2;
 }
 
-.l_name {
-  font-size: 20px;
+.l_artist .d_artist{
+  grid-column-start: 4;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 2;
 }
 
-.d_name {
-  font-size: 20px;
-}
-
-.d_table {
-  width: 100%;
-  padding-left: 70px;
-}
-
-.material-icons {
-  text-align: center;
-  padding-top: 10px;
-  font-size: 60px;
-
-}
-.icons {
-  text-align:center;
+.l_time .d_time{
+  grid-column-start: 5;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 2;
 }
