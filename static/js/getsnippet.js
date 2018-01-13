@@ -1,10 +1,9 @@
 let filePath = '/static/mp3/'
 let songs;
-let songCount = 0
+let songCount = 0;
 let audio = document.getElementById('audioPlayer');
 
 function playNextSnippet() {
-  console.log("")
   let audio = document.getElementById('audioPlayer');
   audio.currentTime = (audio.duration/2) - 5;
   audio.play();
@@ -20,7 +19,7 @@ function nextSong() {
   audio.pause();
   songCount += 1;
   let nextSong = songs[songCount];
-  updateAudioPath(nextSong.title);
+  updateValues(nextSong);
   if (audio.readyState >= 1) {
     playNextSnippet();
   } else {
@@ -28,21 +27,15 @@ function nextSong() {
   }
 }
 
-//To do!!!
-
 function updateAudioPath(songName) {
   audio.src = filePath + songName + '.mp3';
 }
 
-function updateArtist() {
-  return
-}
-
-function updateInfo(songJSON) {
+function updateValues(songJSON){
+  document.getElementById("musicTitle").innerHTML = songJSON.title;
+  document.getElementById("musicArtist").innerHTML = songJSON.artist;
   updateAudioPath(songJSON.title);
 }
-
-//To do!!!
 
 function getSongs() {
   fetch('/songdb').then(function(response){
@@ -51,7 +44,7 @@ function getSongs() {
     songs = data;
   }).then(function() {
     let nextSong = songs[songCount];
-    updateAudioPath(nextSong.title);
+    updateValues(nextSong)
     let audio = document.getElementById('audioPlayer');
     if (audio.readyState >= 1) {
       playNextSnippet();
