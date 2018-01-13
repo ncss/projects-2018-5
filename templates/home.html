@@ -44,8 +44,8 @@
   {% include footer.html %}
   <script>
     //downButton.addEventListener('onclick',animate);
-    function sendVote(button) {
-      vote = button.id == "voteUp" ? 1 : 0;
+    function sendVote(event) {
+      vote = event.target.id == "voteUp" ? 1 : 0;
       fetch("/vote?user=0&song=" + (currentSongId) + "&vote=" + vote).then(
         (resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
@@ -57,7 +57,7 @@
         const nameArray = ["Bob", "Cindy", "Jelly", "JimJim", "JamJam", "Em", "Sam", "Billy"];
         nameArray.sort(() => Math.random() * 2 - 1);
 
-        for(var i = 0; i < 5; i++) {
+        for (var i = 0; i < 5; i++) {
           document.getElementById("ulike" + i.toString()).innerHTML = nameArray[i];
         }
       });

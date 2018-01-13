@@ -48,6 +48,7 @@ function updateValues(songJSON){
     document.getElementById("musicArtist").innerHTML = songJSON.artist;
     updateAudioPath(songJSON.location);
     updateAlbumCoverPath(songJSON.coverlocation);
+    currentSongId = songJSON.id;
   } catch(err) {
     console.log('No more songs!!!');
     noMoreSongs();
