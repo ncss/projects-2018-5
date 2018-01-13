@@ -45,6 +45,7 @@ insert_votes = '''INSERT INTO votes VALUES (1, 'up'),
 class Database:
     def __init__(self):
         self.con = sqlite3.connect("ncssbook.db")
+        cur = self.con.cursor()
         cur.execute(drop_votes)
         cur.execute(create_votes)
         cur.execute(drop_songs)
@@ -55,6 +56,7 @@ class Database:
     def reboot(self):
         self.con.close()
         self.con = sqlite3.connect("ncssbook.db")
+        cur = self.con.cursor()
         cur.execute(drop_votes)
         cur.execute(create_votes)
         cur.execute(drop_songs)
