@@ -29,8 +29,8 @@
         <script src="/static/js/getsnippet.js"></script>
         <script src="/static/js/customprogressbar.js"></script>
       </div>
-      <button id="voteDown"><i class="material-icons">thumb_down</i></button>
-      <button id="voteUp"><i class="material-icons">thumb_up</i></button>
+      <button id="voteDown" class="down"><i class="material-icons down">thumb_down</i></button>
+      <button id="voteUp" class="up"><i class="material-icons up">thumb_up</i></button>
     </div>
     <div class="users_liked">
       <h2>Users Who Liked This:</h2>
@@ -45,7 +45,15 @@
   <script>
     //downButton.addEventListener('onclick',animate);
     function sendVote(event) {
-      vote = event.target.id == "voteUp" ? 1 : 0;
+      console.log(event.target.className)
+      let voteString = "";
+      if (event.target.className.startsWith("material-icons")) {
+        voteString = event.target.className.substr(event.target.className.indexOf(" ") + 1)
+      } else {
+        voteString = event.target.className
+      }
+      vote = voteString == "up" ? 1 : 0;
+      console.log(vote)
       fetch("/vote?user=0&song=" + (currentSongId) + "&vote=" + vote).then(
         (resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
