@@ -19,18 +19,18 @@ CREATE TABLE songs (
     album_cover TEXT
 );
 '''
-insert_songs = '''INSERT INTO songs VALUES (1, '.\\static\\mp3\\Havana.mp3', 'Havana', 'Camilla Cabello', '.\\static\\albumCovers\\Havana.png'),
-(2, '.\\static\\mp3\\Paradise.mp3', 'Paradise', 'Coldplay', '.\\static\\albumCovers\\Paradise.jpg'),
-(3, '.\\static\\mp3\\BlankSpace.mp3', 'Blank Space', 'Taylor Swift', '.\\static\\albumCovers\\BlankSpace.png'),
-(4, '.\\static\\mp3\\AchillesComeDown.mp3', 'Achilles Come Down', 'Gang of Youths', '.\\static\\albumCovers\\Achilles.jpg''),
-(5, '.\\static\\mp3\\TheFinalCountdown.mp3', 'The Final Countdown', 'Europe', '.\\static\\albumCovers\\Countdown.jpg''),
-(6, '.\\static\\mp3\\BohemianRhapsody.mp3', 'Bohemian Rhapsody', 'Queen', '.\\static\\albumCovers\\Queen.jpg''),
-(7, '.\\static\\mp3\\Thunder.mp3, 'Thunder', 'Imagine Dragons', '.\\static\\albumCovers\\Thunder'),
-(8, '.\\static\\mp3\\ShortCircuit.mp3', 'Short Circuit', 'Daft Punk', '.\\static\\albumCovers\\Circuit.png''),
-(9, '.\\static\\mp3\\HotlineBling.mp3', 'Hotline Bling', 'Drake', '.\\static\\albumCovers\\Hotling.png''),
-(10, '.\\static\\mp3\\TheATeam.mp3', 'The A Team', 'Ed Sheeran', '.\\static\\albumCovers\\Ateam.jpg''),
-(11, '.\\static\\mp3\\NeverGonnaGiveYouUp.mp3', 'Never Gonna Give You Up', 'Rick Astley', '.\\static\\albumCovers\\NeverGonnaGiveYouUp.jpg'),
-(12, '.\\static\\mp3\\HowFarI'llGo.mp3, 'How Far I'll', 'James Curren', '.\\static\\albumCovers\\Moana.jpg');'''
+insert_songs = r'''INSERT INTO songs VALUES (1, './static/mp3/Havana.mp3', 'Havana', 'Camilla Cabello', './static/albumCovers/Havana.png'),
+(2, './static/mp3/Paradise.mp3', 'Paradise', 'Coldplay', './static/albumCovers/Paradise.jpg'),
+(3, './static/mp3/BlankSpace.mp3', 'Blank Space', 'Taylor Swift', './static/albumCovers/BlankSpace.png'),
+(4, './static/mp3/AchillesComeDown.mp3', 'Achilles Come Down', 'Gang of Youths', './static/albumCovers/Achilles.jpg'),
+(5, './static/mp3/TheFinalCountdown.mp3', 'The Final Countdown', 'Europe', './static/albumCovers/Countdown.jpg'),
+(6, './static/mp3/BohemianRhapsody.mp3', 'Bohemian Rhapsody', 'Queen', './static/albumCovers/Queen.jpg'),
+(7, './static/mp3/Thunder.mp3', 'Thunder', 'Imagine Dragons', './static/albumCovers/Thunder'),
+(8, './static/mp3/ShortCircuit.mp3', 'Short Circuit', 'Daft Punk', './static/albumCovers/Circuit.png'),
+(9, './static/mp3/HotlineBling.mp3', 'Hotline Bling', 'Drake', './static/albumCovers/Hotling.png'),
+(10, './static/mp3/TheATeam.mp3', 'The A Team', 'Ed Sheeran', './static/albumCovers/Ateam.jpg'),
+(11, './static/mp3/NeverGonnaGiveYouUp.mp3', 'Never Gonna Give You Up', 'Rick Astley', './static/albumCovers/NeverGonnaGiveYouUp.jpg'),
+(12, "./static/mp3/HowFarI'llGo.mp3", "How Far I'll Go", 'James Curran', './static/albumCovers/Moana.jpg');'''
 insert_votes = '''INSERT INTO votes VALUES (1, 'up'),
 (2, 'down'),
 (3, 'up'),
