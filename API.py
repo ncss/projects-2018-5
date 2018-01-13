@@ -98,14 +98,14 @@ class Person:
         cur.execute(down_votes)
         for row in cur:
             self.bad.append(row)
-        
+
 
     def name(self):
         return(self.name)
-    
+
     def good(self): #returns list of songs a user likes
         return(self.good)
-    
+
     def bad(self): #returns list of songs a user dislikes
         return(self.bad)
 
@@ -119,13 +119,13 @@ class Person:
 
 
 class Song:
-    
+
         def __init__(self, name, artist, location):
             self.title = name
             self.artist = artist
             self.location = location
 
-        
+
 
 
 db = Database()

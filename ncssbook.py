@@ -83,9 +83,8 @@ def vote(response):
     song = response.get_field("song")  # Song ID
     vote = response.get_field("vote")  # 1:UP,0:DOWN
     params = [user, song, vote]
-
-    params["success"] = True
-
+    respDict = {"user": user, "song": song, "vote": vote}
+    respDict["success"] = API.vote(params)
     response.write(params)
 
 

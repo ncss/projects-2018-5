@@ -21,8 +21,8 @@
     </div>
     <div class="cover">
       <img src ="/static/images/acdc.jpg" alt="This will be Album Cover">
-      <button><i class="material-icons">thumb_down</i></button>
-      <button><i class="material-icons">thumb_up</i></button>
+      <button><i class="material-icons" id="voteDown">thumb_down</i></button>
+      <button><i class="material-icons" id="voteUp">thumb_up</i></button>
     </div>
     <div class="users_liked">
       <div id="temporarymusicplayer">
@@ -44,8 +44,6 @@
           <li>Bob</li>
       </ul>
     </div>
-    <button><i class="material-icons" id="voteDown">thumb_down</i></button>
-    <button><i class="material-icons" id="voteUp">thumb_up</i></button>
   </div>
   <script>
     downButton = document.getElementById("voteDown");
@@ -57,7 +55,9 @@
       fetch("/vote?user=1&song=2&vote=" + vote)
       .then((resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
-        alert(data["success"])
+        if data["success"] == false {
+          alert("failed")
+        }
       })
     }
   </script>
