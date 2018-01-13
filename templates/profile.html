@@ -10,17 +10,19 @@
     <div class='page grid'>
       <div class="box">
         <img src="/static/images/profile_pic.png" alt="profile pic"/>
-        <h4 class='name'>{{ person.name }}</h4>
+        <h4 class='name'>{{ name }}</h4>
       </div>
       <div class="likebox">
         <div class="icons">
           <h1 class="material-icons">thumb_up</h1>
         </div>
         <table class="l_table">
-          {% for likedsong in person.good %}<tr>
-            <td class="l_name">{{ likedsong.title }}</td>
-            <td>{{ likedsong.artist }}</td>
-          </tr>{% end for %}
+          {% for likedsong in liked %}
+          <tr>
+            <td class="l_name">{{ likedsong["title"] }}</td>
+            <td>{{ likedsong["artist"] }}</td>
+          </tr>
+          {% end for %}
         </table>
       </div>
 
@@ -29,10 +31,12 @@
           <h1 class="material-icons">thumb_down</h1>
         </div>
         <table class="d_table">
-          {% for dislikedsong in person.good %}<tr>
-            <td class="d_name">{{ dislikedsong.title }}</td>
-            <td>{{ dislikedsong.artist }}</td>
-          </tr>{% end for %}
+          {% for dislikedsong in disliked %}
+          <tr>
+            <td class="d_name">{{ dislikedsong["title"] }}</td>
+            <td>{{ dislikedsong["artist"] }}</td>
+          </tr>
+          {% end for %}
         </table>
       </div>
 
