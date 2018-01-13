@@ -22,6 +22,9 @@
 
 .cover > #albumHolder > #albumCover {
   width: 100%;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
 }
 
 .cover > button {
