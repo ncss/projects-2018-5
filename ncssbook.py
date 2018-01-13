@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from tornado.ncss import Server
 from TemplatingParser import templatingParser
+import json
+import API
 
 
 def index(response):
@@ -43,6 +45,13 @@ def style(response):
 def about(response):
     writeResponse(response, 'templates/about.html')
 
+def songdb(response):
+    out = []
+    
+    for music in API.get_all_songs():
+        out.append({"title" : music.title, "artist" : music.artist, "location" : music.location})
+    
+    response.write(json.dumps(out))
 
 def header(response):
     response.write('''
@@ -86,7 +95,13 @@ server.register('/profile', profile)
 server.register('/style-guide', style)
 server.register('/song-player', home)
 server.register('/about', about)
+<<<<<<< HEAD
 server.register('/header', header)
 server.register('/footer', footer)
 server.register('/vote', vote)
+=======
+server.register('/header',header)
+server.register('/footer',footer)
+server.register('/songdb',songdb)
+>>>>>>> master
 server.run()
