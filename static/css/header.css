@@ -7,28 +7,30 @@ header {
 .header-logo {
   display: flex;
 }
-.header-logo > img {
+.header-logo  img {
   align-self: center;
 }
-.header-logo > h2 {
+.header-logo  h2 {
   align-self: center;
 }
 .header-user {
   display: flex;
 }
-.header-user > img {
+.header-user  img {
   align-self: center;
 }
-.header-user > h2{
+.header-user  h2{
   align-self: center;
 }
 
 .logo {
-  height:100px;
-  width: 100px;
+  height:75px;
+  margin-right: 10px;
 }
 .profile_pic {
-  width: 50px;
+  width: 70px;
   margin-left: 10px;
+  align-self: center;
+  margin-top:5px;
 
 }
