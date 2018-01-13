@@ -86,7 +86,7 @@ class Database:
 
 class Person:
 
-    def __init__(self, con):
+    def __init__(self):
         self.name = "James" #get the current users username
         self.good = []
         self.bad = []
@@ -143,17 +143,28 @@ def vote(input):
         cur.execute('''INSERT INTO votes VALUES ({}, 'down');'''.format(input[1]))
     else:
         cur.execute('''INSERT INTO votes VALUES ({}, 'up');'''.format(input[1]))
-    up_votes = '''SELECT title FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
-    cur = con.cursor()
+        
+    up_votes = '''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
     cur.execute(up_votes)
     for row in cur:
-        person.good.append(row[0])
+        id = row[0]
+        location = row[1]
+        name = row[2]
+        artist = row[3]
+        person.good.append(Song(id,name,artist,location))
 
-    down_votes ='''SELECT title FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
+    down_votes ='''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
     cur.execute(down_votes)
     for row in cur:
-        person.bad.append(row[0])
+        id = row[0]
+        location = row[1]
+        name = row[2]
+        artist = row[3]
+        person.bad.append(Song(id,name,artist,location))
     return True #to be fixed with try catch block
+
+def get_person():
+    return person
 
 
 
