@@ -28,6 +28,13 @@
   border-radius: 50px;
 }
 
+.cover > button:hover {
+  border: 4px solid black;
+}
+.cover material-icons:hover{
+  color: #E0E0E0;
+}
+
 .good {
 
 
