@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include head.html %}
+    <title>Profile Page</title>
+    <link href="/static/css/profile.css" rel="stylesheet"/>
+  </head>
+  <body>
+    {% include header.html %}
+    <div class='page grid'>
+      <div class="box">
+        <img class="big_profile_pic" src="/static/images/profile_pic.png" alt="profile pic"/>
+        <h4 class='name'>{{ name }}</h4>
+      </div>
+      <div class="likebox">
+        <div class="icons">
+          <h1 class="material-icons">thumb_up</h1>
+        </div>
+        <table class="l_table">
+          {% for likedsong in liked %}
+          <tr>
+            <td class="l_name">{{ likedsong["title"] }}</td>
+            <td>{{ likedsong["artist"] }}</td>
+          </tr>
+          {% end for %}
+        </table>
+      </div>
+
+      <div class="dislikebox">
+        <div class="icons">
+          <h1 class="material-icons">thumb_down</h1>
+        </div>
+        <table class="d_table">
+          {% for dislikedsong in disliked %}
+          <tr>
+            <td class="d_name">{{ dislikedsong["title"] }}</td>
+            <td>{{ dislikedsong["artist"] }}</td>
+          </tr>
+          {% end for %}
+        </table>
+      </div>
+
+    </div>
+  </body>
+</html>

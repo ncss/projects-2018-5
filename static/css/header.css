@@ -1,0 +1,34 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.header-logo {
+  display: flex;
+}
+.header-logo > img {
+  align-self: center;
+}
+.header-logo > h2 {
+  align-self: center;
+}
+.header-user {
+  display: flex;
+}
+.header-user > img {
+  align-self: center;
+}
+.header-user > h2{
+  align-self: center;
+}
+
+.logo {
+  height:100px;
+  width: 100px;
+}
+.profile_pic {
+  width: 50px;
+  margin-left: 10px;
+
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+  {% include head.html %}
+  <title>Snippr</title>
+  <link href="/static/css/home.css" rel="stylesheet" />
+
+</head>
+<body>
+  {% include header.html %}
+  <div class="page">
+    <div class="song_info">
+      <h2>Song Information:</h2>
+      <div>
+          <p id = "musicTitle">{{ music["title"] }}</p>
+          <p id = "musicArtist">{{ music["artist"] }}</p>
+          <p id = "musicAlbum">{{ music["album"] }}</p>
+          <p id = "musicTags">{{ music["tags"] }}</p>
+      </div>
+    </div>
+    <div class="cover">
+      <img src ="/static/images/acdc.jpg" alt="This will be Album Cover">
+
+      <button><i class="material-icons">thumb_down</i></button>
+      <button><i class="material-icons">thumb_up</i></button>
+    </div>
+    <div id="temporarymusicplayer">
+      <audio id="audioPlayer" controls = 'controls'
+             src="/static/mp3/BlankSpace.mp3" preload>
+        Your browser does not support the <code>audio</code> element.
+      </audio>
+      <!-- <script src="/static/js/getsongs.js"></script> -->
+      <script src="/static/js/getsnippet.js"></script>
+
+    </div>
+    <div class="users_liked">
+      <h2>Users Who Liked This:</h2>
+      <ul class="user_list">
+          <li>Bob</li>
+          <li>Cindy</li>
+          <li>Jelly</li>
+          <li>JimJim</li>
+          <li>JamJam</li>
+          <li>Em</li>
+          <li>Sam</li>
+          <li>Billy</li>
+          <li>Bob</li>
+      </ul>
+    </div>
+  </div>
+  {% include footer.html %}
+  <script src="/static/js/getsnippet.js"></script>
+  <script>
+    downButton = document.getElementById("voteDown");
+    upButton = document.getElementById("voteUp");
+    downButton.onclick = function(){sendVote(downButton)};
+    upButton.onclick = function(){sendVote(upButton)};
+    function sendVote(button) {
+      vote = button.id == "voteUp" ? 1 : 0;
+      fetch("/vote?user=0&song=2&vote=" + vote)
+      .then((resp) => resp.json()).then(function(data) {
+        // Do what you need to move to next song
+
+        console.log(data)
+        if (data["success"] == false) {
+          alert("failed")
+        }
+      })
+    }
+  </script>
+</body>
+{% include footer.html %}
+
+<script>
+function changeValues(){
+  document.getElementById("musicTitle").innerHTML = "INSERT TEXT FROM JSON HERE"
+  document.getElementById("musicArtist").innerHTML = "INSERT TEXT FROM JSON HERE"
+  document.getElementById("musicAlbum").innerHTML = "INSERT TEXT FROM JSON HERE"
+  document.getElementById("musicTags").innerHTML = "INSERT TEXT FROM JSON HERE"
+
+}
+
+
+</script>
+
