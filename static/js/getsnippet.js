@@ -3,6 +3,7 @@ let songs;
 let songCount = 0;
 let audio = document.getElementById('audioPlayer');
 let timeouts = []
+let currentSongId = 0;
 
 function playNextSnippet() {
   for (var i = 0; i < timeouts.length; i++) {
@@ -35,7 +36,6 @@ function nextSong() {
 }
 
 function updateAudioPath(filePath) {
-  console.log(filePath)
   audio.src = filePath;
 }
 
@@ -43,6 +43,7 @@ function updateValues(songJSON){
   document.getElementById("musicTitle").innerHTML = songJSON.title;
   document.getElementById("musicArtist").innerHTML = songJSON.artist;
   updateAudioPath(songJSON.location);
+  currentSongId = songJSON.id;
 }
 
 function getSongs() {
