@@ -20,7 +20,7 @@ def writeResponse(response, filename, context={}):
     response.write(templatingParser.translateToHTML(filename, context))
 
 def profile(response):
-    writeResponse(response, 'templates/profile.html')
+    writeResponse(response, 'templates/profile.html', context={"person" : API.get_person()})
 
 def home(response):
     context = {

@@ -12,14 +12,14 @@
 <body class='grid'>
   <div class="box">
     <img src="https://pre00.deviantart.net/67de/th/pre/i/2013/005/7/9/circle_profile_by_pdogkasper-d5qkroq.png" />
-    <h4 class='name'>{{ get_person().name }}</h4>
+    <h4 class='name'>{{ person.name }}</h4>
   </div>
   <div class="likebox">
     <div class="icons">
         <h1 class="material-icons">thumb_up</h1>
     </div>
     <table class="l_table">
-      {% for likedsong in get_person().good %}<tr>
+      {% for likedsong in person.good %}<tr>
         <td class="l_name">{{ likedsong.title }}</td>
         <td>{{ likedsong.artist }}</td>
       </tr>{% end for %}
@@ -31,7 +31,7 @@
         <h1 class="material-icons">thumb_down</h1>
     </div>
     <table class="d_table">
-      {% for dislikedsong in get_person().good %}<tr>
+      {% for dislikedsong in person.good %}<tr>
         <td class="d_name">{{ dislikedsong.title }}</td>
         <td>{{ dislikedsong.artist }}</td>
       </tr>{% end for %}
