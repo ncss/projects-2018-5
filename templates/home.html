@@ -35,15 +35,9 @@
     <div class="users_liked">
       <h2>Users Who Liked This:</h2>
       <ul class="user_list">
-          <li>Bob</li>
-          <li>Cindy</li>
-          <li>Jelly</li>
-          <li>JimJim</li>
-          <li>JamJam</li>
-          <li>Em</li>
-          <li>Sam</li>
-          <li>Billy</li>
-          <li>Bob</li>
+        {% for i in range(5) %}
+        <li id = "ulike{{ str(i) }}">{{ ["Bob", "JamJam", "Jelly", "Cindy", "Sam"][i] }}</li>
+        {% end for %}
       </ul>
     </div>
   </div>
@@ -62,6 +56,12 @@
         playNextSnippet();
         if (data["success"] == false) {
           alert("failed");
+        }
+        const nameArray = ["Bob", "Cindy", "Jelly", "JimJim", "JamJam", "Em", "Sam", "Billy"];
+        nameArray.sort(() => Math.random() * 2 - 1);
+
+        for(var i = 0; i < 5; i++) {
+          document.getElementById("ulike" + i.toString()).innerHTML = nameArray[i];
         }
       })
     }
