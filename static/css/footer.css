@@ -1,5 +1,3 @@
-
-
 footer {
   bottom: 0;
   position: fixed;
@@ -20,25 +18,27 @@ footer {
 }
 
 .about {
-text-align: right;
+  text-align: right;
 }
 
 .copyright {
-font-size: 12px;
+  font-size: 12px;
 }
 
 .icons {
-text-align: left;
+  text-align: left;
 }
 
 .footer-logo {
   display: flex;
   justify-content: center;
 }
+
 .footer-logo > img {
   align-self: center;
 }
-.footer-logo > h1 {
+
+.footer-logo h1 {
   align-self: center;
   font-size: 25px;
 }
