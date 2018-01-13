@@ -94,6 +94,9 @@ def vote(response):
     respDict["success"] = API.vote(params)
     response.write(respDict)
 
+def fourofourhandler(response):
+    writeResponse(response, 'templates/404.html')
+
 
 server = Server()
 server.register('/', home)
@@ -101,8 +104,7 @@ server.register('/profile', profile)
 server.register('/style-guide', style)
 server.register('/song-player', index)
 server.register('/about', about)
-server.register('/header', header)
-server.register('/footer', footer)
 server.register('/vote', vote)
 server.register('/songdb', songdb)
+server.register(r'/.+', fourofourhandler)
 server.run()
