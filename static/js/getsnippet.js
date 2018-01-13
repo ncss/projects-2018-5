@@ -4,6 +4,7 @@ let songCount = 0;
 let audio = document.getElementById('audioPlayer');
 let albumCover = document.getElementById('albumCover');
 let timeouts = []
+let currentSongId = 0;
 
 function playNextSnippet() {
   for (var i = 0; i < timeouts.length; i++) {
@@ -46,6 +47,7 @@ function updateValues(songJSON){
   updateAudioPath(songJSON.location);
   updateAlbumCoverPath(songJSON.coverlocation);
   console.log(songJSON.coverlocation);
+  currentSongId = songJSON.id
 }
 
 function getSongs() {
