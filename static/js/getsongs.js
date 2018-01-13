@@ -1,9 +1,13 @@
+let songs
+
 function getSongs() {
-  let songJSONFile;
-  let songJSON = fetch('/songdb').then(function(response){
+  fetch('/songdb').then(function(response){
     return response.json()
-  }).then(function(songJSON) {
-    songJSONFile = songJSON;
+  }).then(function(data){
+    songs = data;
+    console.log(songs);
+    return songs
   });
-  return songJSONFile
 }
+
+getSongs();
