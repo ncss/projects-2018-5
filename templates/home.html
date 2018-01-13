@@ -20,8 +20,8 @@
       <!-- <div id="progressBar">
         <div id="bar">Progress</div>
       </div> -->
-      <button><i class="material-icons" id="voteDown">thumb_down</i></button>
-      <button><i class="material-icons" id="voteUp">thumb_up</i></button>
+      <button id="voteDown"><i class="material-icons">thumb_down</i></button>
+      <button id="voteUp"><i class="material-icons">thumb_up</i></button>
     </div>
     <div id="audioPlayerDiv">
       <audio id="audioPlayer"
@@ -56,8 +56,8 @@
       fetch("/vote?user=0&song=2&vote=" + vote)
       .then((resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
-
-        console.log(data)
+        nextSong()
+        playNextSnippet()
         if (data["success"] == false) {
           alert("failed")
         }

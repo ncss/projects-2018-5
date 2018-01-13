@@ -19,9 +19,9 @@ CREATE TABLE songs (
 );
 '''
 
-insert_songs = '''INSERT INTO songs VALUES (1, '.\\static\\Havana.mp3', 'Havana', 'Camilla Cabello'),
-(2, '.\\static\\Paradise.mp3', 'Paradise', 'Coldplay'),
-(3, '.\\static\\BlankSpace.mp3', 'Blank Space', 'Taylor Swift'),
+insert_songs = '''INSERT INTO songs VALUES (1, '.\\static\\mp3\\Havana.mp3', 'Havana', 'Camilla Cabello'),
+(2, '.\\static\\mp3\\Paradise.mp3', 'Paradise', 'Coldplay'),
+(3, '.\\static\\mp3\\BlankSpace.mp3', 'Blank Space', 'Taylor Swift'),
 (4, '', 'Achilles Come Down', 'Gang of Youths'),
 (5, '', 'The Final Countdown', 'James Curran'),
 (6, '', 'Bohemian Rhapsody', 'Queen'),
@@ -29,7 +29,7 @@ insert_songs = '''INSERT INTO songs VALUES (1, '.\\static\\Havana.mp3', 'Havana'
 (8, '', 'Short Circuit', 'Daft Punk'),
 (9, '', 'Hotline Bling', 'Drake'),
 (10, '', 'The A Team', 'Ed Sheeran'),
-(11, '.\\static\\NeverGonnaGiveYouUp.mp3', 'Never Gonna Give You Up', 'Rick Astley');'''
+(11, '.\\static\\mp3\\NeverGonnaGiveYouUp.mp3', 'Never Gonna Give You Up', 'Rick Astley');'''
 
 insert_votes = '''INSERT INTO votes VALUES (1, 'up'),
 (2, 'down'),
