@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-{% include header.html %}
 <head>
-<Title>Song Player</Title>
-<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="/static/css/home.css" rel="stylesheet" />
-<link href="/static/css/styleguide.css" rel="stylesheet" />
+  {% include head.html %}
+  <title>Snippr</title>
+  <link href="/static/css/home.css" rel="stylesheet" />
+
 </head>
 <body>
+  {% include header.html %}
   <div class="page">
-    <!--<h1>{{ music["title"] }}</h1>-->
     <div class="song_info">
       <h2>Song Information:</h2>
       <div>
@@ -27,7 +25,7 @@
           Your browser does not support the <code>audio</code> element.
         </audio>
       </div>
-      <button class="bad"id="voteDown"><i class="material-icons">thumb_down</i></button>
+      <button class="bad" id="voteDown"><i class="material-icons">thumb_down</i></button>
       <button class="good" id="voteUp"><i class="material-icons">thumb_up</i></button>
     </div>
     <div class="users_liked">
@@ -45,6 +43,8 @@
       </ul>
     </div>
   </div>
+  {% include footer.html %}
+  <script src="/static/js/getsnippet.js"></script>
   <script>
     downButton = document.getElementById("voteDown");
     upButton = document.getElementById("voteUp");
@@ -52,9 +52,10 @@
     upButton.onclick = function(){sendVote(upButton)};
     function sendVote(button) {
       vote = button.id == "voteUp" ? 1 : 0;
-      fetch("/vote?user=1&song=2&vote=" + vote)
+      fetch("/vote?user=0&song=2&vote=" + vote)
       .then((resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
+
         console.log(data)
         if (data["success"] == false) {
           alert("failed")
@@ -63,5 +64,3 @@
     }
   </script>
 </body>
-{% include footer.html %}
-<script src="/static/js/getsnippet.js"></script>

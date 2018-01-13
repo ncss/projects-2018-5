@@ -23,7 +23,11 @@ def writeResponse(response, filename, context={}):
 
 
 def profile(response):
-    writeResponse(response, 'templates/profile.html', context={"person" : API.get_person()})
+    person = API.get_person()
+    liked = person.good()
+    disliked = person.bad()
+    name = person.get_name()
+    writeResponse(response, 'templates/profile.html', context={"liked" : liked, "disliked": disliked, "name": name})
 
 
 def home(response):
@@ -50,7 +54,8 @@ def songdb(response):
     out = []
 
     for music in API.get_all_songs():
-        out.append({"title": music.title, "artist": music.artist, "location": music.location})
+        if music.location:
+            out.append({"id" : music.id, "title": music.title, "artist": music.artist, "location": music.location})
 
     response.write(json.dumps(out))
 
