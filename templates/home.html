@@ -2,6 +2,7 @@
 <head>
   {% include head.html %}
   <title>Snippr</title>
+  <link href="/static/css/bar.css" rel="stylesheet" />
   <link href="/static/css/home.css" rel="stylesheet" />
 
 </head>
@@ -17,6 +18,9 @@
     </div>
     <div class="cover">
       <img src ="/static/images/acdc.jpg" alt="This will be Album Cover">
+      <div id="bar">
+        <div id="progressBar"></div>
+      </div>
       <div class="music" id="temporarymusicplayer">
         <audio id="audioPlayer" class = "audioPlayer"
                src="/static/mp3/BlankSpace.mp3" preload>
@@ -44,6 +48,7 @@
       </ul>
     </div>
   </div>
+
   <!-- <script>
     downButton = document.getElementById("voteDown");
     upButton = document.getElementById("voteUp");
@@ -61,11 +66,6 @@
         }
       })
     }
-<<<<<<< HEAD
-  </script> -->
-</body>
-{% include footer.html %}
-=======
   </script>
   <script>
   function changeValues(){
@@ -76,4 +76,3 @@
   }
 </script>
 </body>
->>>>>>> 6e6693e9a29687eac6beec67d2021f948ef5d9c8

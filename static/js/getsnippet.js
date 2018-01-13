@@ -2,6 +2,7 @@ let filePath = '/static/mp3/'
 let songs;
 let songCount = 0;
 let audio = document.getElementById('audioPlayer');
+let timeElapsed = 0;
 
 function playNextSnippet() {
   let audio = document.getElementById('audioPlayer');
