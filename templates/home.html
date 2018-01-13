@@ -27,8 +27,8 @@
           Your browser does not support the <code>audio</code> element.
         </audio>
       </div>
-      <button class="bad"><i class="material-icons" id="voteDown">thumb_down</i></button>
-      <button class="good"><i class="material-icons" id="voteUp">thumb_up</i></button>
+      <button class="bad"id="voteDown"><i class="material-icons">thumb_down</i></button>
+      <button class="good" id="voteUp"><i class="material-icons">thumb_up</i></button>
     </div>
     <div class="users_liked">
       <h2>Users Who Liked This:</h2>
@@ -55,7 +55,8 @@
       fetch("/vote?user=1&song=2&vote=" + vote)
       .then((resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
-        if data["success"] == false {
+        console.log(data)
+        if (data["success"] == false) {
           alert("failed")
         }
       })

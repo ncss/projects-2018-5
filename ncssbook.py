@@ -87,7 +87,7 @@ def vote(response):
     params = [user, song, vote]
     respDict = {"user": user, "song": song, "vote": vote}
     respDict["success"] = API.vote(params)
-    response.write(params)
+    response.write(respDict)
 
 
 server = Server()
