@@ -7,6 +7,9 @@ header {
 .header-logo {
   display: flex;
 }
+.header-logo  img {
+  align-self: center;
+}
 .header-logo  h2 {
   align-self: center;
 }
@@ -21,12 +24,13 @@ header {
 }
 
 .logo {
-  height:100px;
+  height:75px;
   margin-right: 10px;
 }
 .profile_pic {
-  width: 50px;
+  width: 70px;
   margin-left: 10px;
   align-self: center;
+  margin-top:5px;
 
 }
