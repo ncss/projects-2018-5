@@ -52,7 +52,7 @@ class Database:
         self.cur.execute(drop_songs)
         self.cur.execute(create_songs)
         self.cur.execute(insert_songs)
-        #cur.execute(insert_votes)
+        self.cur.execute(insert_votes)
 
     def reboot(self):
         self.con.close()
@@ -63,7 +63,7 @@ class Database:
         self.cur.execute(drop_songs)
         self.cur.execute(create_songs)
         self.cur.execute(insert_songs)
-        #cur.execute(insert_votes)
+        self.cur.execute(insert_votes)
 
 
 
@@ -90,15 +90,14 @@ class Person:
         self.name = "James" #get the current users username
         self.good = []
         self.bad = []
-        
-        
+
 
     def name(self):
         return(self.name)
-    
+
     def good(self): #returns list of songs a user likes
         return(self.good)
-    
+
     def bad(self): #returns list of songs a user dislikes
         return(self.bad)
 
@@ -112,14 +111,13 @@ class Person:
 
 
 class Song:
-    
         def __init__(self, id, name, artist, location):
             self.id = id
             self.title = name
             self.artist = artist
             self.location = location
 
-        
+
 
 
 db = Database()
@@ -165,9 +163,3 @@ def vote(input):
 
 def get_person():
     return person
-
-
-
-
-
-

@@ -1,19 +1,22 @@
-{% include header.html %}
+<!DOCTYPE html>
 <html>
-<head>
-  <link rel="stylesheet" href="static/css/styleguide.css"/>
-<link rel="stylesheet" href="static/css/about.css"/>
-</head>
-<body>
-  <h1 id="tag">Update your Addiction</h1>
-  <h3 class="box_title">Listen </h3>
-  <p id="song">10 second snippets of songs </p>
-  <h3 class="box_title"> Vote </h3>
-  <p id="vote"> Songs you like, vote them up </p>
-  <h3 class="box_title"> Record </h3>
-  <p id="profile"> Up-voted songs are listed on your profile </p>
-  <h3 class="box_title"> Discover </h3>
-  <p id="update"> Update your tunes snippet by snippet </p>
-  {% include footer.html %}
-</body>
+  <head>
+    {% include head.html %}
+    <link rel="stylesheet" href="static/css/styleguide.css"/>
+    <link rel="stylesheet" href="static/css/about.css"/>
+    <title>About</title>
+  </head>
+  <body>
+    {% include header.html %}
+    <h1 id="tag">Update your Addiction</h1>
+    <h3 class="box_title">Listen </h3>
+    <p id="song">10 second snippets of songs </p>
+    <h3 class="box_title"> Vote </h3>
+    <p id="vote"> Songs you like, vote them up </p>
+    <h3 class="box_title"> Record </h3>
+    <p id="profile"> Up-voted songs are listed on your profile </p>
+    <h3 class="box_title"> Discover </h3>
+    <p id="update"> Update your tunes snippet by snippet </p>
+    {% include footer.html %}
+  </body>
 </html>
