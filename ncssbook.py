@@ -96,10 +96,10 @@ def vote(response):
 
 
 server = Server()
-server.register('/', index)
+server.register('/', home)
 server.register('/profile', profile)
 server.register('/style-guide', style)
-server.register('/song-player', home)
+server.register('/song-player', index)
 server.register('/about', about)
 server.register('/header', header)
 server.register('/footer', footer)
