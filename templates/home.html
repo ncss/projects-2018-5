@@ -21,16 +21,16 @@
     </div>
     <div class="cover">
       <img src ="/static/images/acdc.jpg" alt="This will be Album Cover">
-      <button><i class="material-icons">thumb_down</i></button>
-      <button><i class="material-icons">thumb_up</i></button>
-    </div>
-    <div class="users_liked">
-      <div id="temporarymusicplayer">
+      <div class="music" id="temporarymusicplayer">
         <audio id="audioPlayer" controls="controls"
                src="/static/mp3/NeverGonnaGiveYouUp.mp3" preload autoplay>
           Your browser does not support the <code>audio</code> element.
         </audio>
       </div>
+      <button class="bad"id="voteDown"><i class="material-icons">thumb_down</i></button>
+      <button class="good" id="voteUp"><i class="material-icons">thumb_up</i></button>
+    </div>
+    <div class="users_liked">
       <h2>Users Who Liked This:</h2>
       <ul class="user_list">
           <li>Bob</li>
@@ -45,6 +45,23 @@
       </ul>
     </div>
   </div>
+  <script>
+    downButton = document.getElementById("voteDown");
+    upButton = document.getElementById("voteUp");
+    downButton.onclick = function(){sendVote(downButton)};
+    upButton.onclick = function(){sendVote(upButton)};
+    function sendVote(button) {
+      vote = button.id == "voteUp" ? 1 : 0;
+      fetch("/vote?user=1&song=2&vote=" + vote)
+      .then((resp) => resp.json()).then(function(data) {
+        // Do what you need to move to next song
+        console.log(data)
+        if (data["success"] == false) {
+          alert("failed")
+        }
+      })
+    }
+  </script>
 </body>
 {% include footer.html %}
 <script src="/static/js/getsnippet.js"></script>
