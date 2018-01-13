@@ -2,14 +2,68 @@ import random
 import re
 import sqlite3
 
+drop_votes = 'DROP TABLE IF EXISTS votes;'
+create_votes = '''
+CREATE TABLE votes (
+	song_id INTEGER UNIQUE,
+	vote TEXT
+);
+'''
+drop_songs = 'DROP TABLE IF EXISTS songs;'
+create_songs = '''
+CREATE TABLE songs (
+	id INTEGER UNIQUE,
+	location TEXT,
+	title TEXT,
+	artist TEXT
+);
+'''
+
+insert_songs = '''INSERT INTO songs VALUES (1, '', 'Havana', 'Camilla Cabello'),
+(2, '', 'Paradise', 'Coldplay'),
+(3,  '', 'Blank Space', 'Taylor Swift'),
+(4, '', 'Achilles Come Down', 'Gang of Youths'),
+(5, '', 'The Final Countdown', 'James Curran'),
+(6, '', 'Bohemian Rhapsody', 'Queen'),
+(7, '', 'Thunder', 'Imagine Dragons'),
+(8, '', 'Short Circuit', 'Daft Punk'),
+(9, '', 'Hotline Bling', 'Drake'),
+(10, '', 'The A Team', 'Ed Sheeran');'''
+
+insert_votes = '''INSERT INTO votes VALUES (1, 'up'),
+(2, 'down'),
+(3, 'up'),
+(4, 'up'),
+(5, 'down'),
+(6, 'up'),
+(7, 'down'),
+(8, 'down'),
+(9, 'up'),
+(10, 'down');'''
+
 #cur = sqlite3.cursor()
 class Database:
     def __init__(self):
         self.con = sqlite3.connect("ncssbook.db")
+        cur = self.con.cursor()
+        cur.execute(drop_votes)
+        cur.execute(create_votes)
+        cur.execute(drop_songs)
+        cur.execute(create_songs)
+        cur.execute(insert_songs)
+        #cur.execute(insert_votes)
 
     def reboot(self):
         self.con.close()
         self.con = sqlite3.connect("ncssbook.db")
+        cur = self.con.cursor()
+        cur.execute(drop_votes)
+        cur.execute(create_votes)
+        cur.execute(drop_songs)
+        cur.execute(create_songs)
+        cur.execute(insert_songs)
+        #scur.execute(insert_votes)
+
 
     @staticmethod
     def rand_music(musics):
@@ -49,11 +103,11 @@ class Person:
     def name(self):
         return(self.name)
     
-    def good(self):
+    def good(self): #returns list of songs a user likes
         return(self.good)
     
-    def bad(self):
-        return(self.good)
+    def bad(self): #returns list of songs a user dislikes
+        return(self.bad)
 
     #def add_song(self, vote):
         #if vote == "BAD":
@@ -63,33 +117,35 @@ class Person:
         #else:
             #raise ValueError("vote should be \"BAD\" or \"GOOD\"")
 
-    def voted_song(self, vsong):
-        for songs in self.bad:
-            for song in self.bad[songs]:
-                if song == vsong:
-                    return True
-        for songs in self.good:
-            for song in self.good[songs]:
-                if song == vsong:
-                    return True
-        return False
 
-class Music:
+class Song:
     
         def __init__(self, name, artist, location):
             self.title = name
             self.artist = artist
             self.location = location
 
+        
+
 
 db = Database()
 con = db.con
 cur = con.cursor()
-musics = []
-song_details = 'SELECT * FROM songs;'
-cur.execute(song_details)
-for row in cur:
-    location = row[1]
-    name = row[2]
-    artist = row[3]
-    musics.append(Music(name,artist,location))
+
+
+def get_all_songs():
+    song_details = 'SELECT * FROM songs;'
+    cur.execute(song_details)
+    musics = []
+    for row in cur:
+        location = row[1]
+        name = row[2]
+        artist = row[3]
+        musics.append(Song(name,artist,location))
+    return musics
+
+def vote(input):
+    if input[2] == 0:
+        cur.execute('''INSERT INTO votes VALUES ({}, 'down');'''.format(input[1]))
+    else:
+        cur.execute('''INSERT INTO votes VALUES ({}, 'up');'''.format(input[1]))
