@@ -29,6 +29,12 @@
       <button><i class="material-icons" id="VoteUp">thumb_up</i></button>
     </div>
     <div class="users_liked">
+      <div id="temporarymusicplayer">
+        <audio id="audioPlayer" controls="controls"
+               src="/static/mp3/BlankSpace.mp3" preload>
+          Your browser does not support the <code>audio</code> element.
+        </audio>
+      </div>
       <h2>Users Who Liked This:</h2>
       <ul class="user_list">
           <li>Bob</li>
@@ -58,3 +64,4 @@ function next(){
 </script>
 
 {% include footer.html %}
+<script src="/static/js/getsnippet.js"></script>
