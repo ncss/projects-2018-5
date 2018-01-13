@@ -31,10 +31,7 @@ insert_songs = '''INSERT INTO songs VALUES (1, '.\\static\\mp3\\Havana.mp3', 'Ha
 (10, '', 'The A Team', 'Ed Sheeran', ''),
 (11, '.\\static\\mp3\\NeverGonnaGiveYouUp.mp3', 'Never Gonna Give You Up', 'Rick Astley', '.\\static\\albumCovers\\NeverGonnaGiveYouUp.jpg');'''
 
-insert_votes = '''INSERT INTO votes VALUES (1, 'up'),
-(2, 'down'),
-(3, 'up'),
-(4, 'up'),
+insert_votes = '''INSERT INTO votes VALUES (4, 'up'),
 (5, 'down'),
 (6, 'up'),
 (7, 'down'),
@@ -145,7 +142,8 @@ def get_all_songs():
     return musics
 
 def vote(input):
-    if input[2] == 0:
+    print(input)
+    if input[2] == '0':
         cur.execute('''INSERT INTO votes VALUES ({}, 'down');'''.format(input[1]))
     else:
         cur.execute('''INSERT INTO votes VALUES ({}, 'up');'''.format(input[1]))
