@@ -19,18 +19,17 @@
     </div>
     <div class="cover">
       <img src ="/static/images/acdc.jpg" alt="This will be Album Cover">
+      <div id="temporarymusicplayer">
+        <audio id="audioPlayer" controls = 'controls'
+               src="/static/mp3/BlankSpace.mp3" preload>
+          Your browser does not support the <code>audio</code> element.
+        </audio>
+        <!-- <script src="/static/js/getsongs.js"></script> -->
+        <script src="/static/js/getsnippet.js"></script>
 
+      </div>
       <button><i class="material-icons">thumb_down</i></button>
       <button><i class="material-icons">thumb_up</i></button>
-    </div>
-    <div id="temporarymusicplayer">
-      <audio id="audioPlayer" controls = 'controls'
-             src="/static/mp3/BlankSpace.mp3" preload>
-        Your browser does not support the <code>audio</code> element.
-      </audio>
-      <!-- <script src="/static/js/getsongs.js"></script> -->
-      <script src="/static/js/getsnippet.js"></script>
-
     </div>
     <div class="users_liked">
       <h2>Users Who Liked This:</h2>
@@ -81,4 +80,3 @@ function changeValues(){
 
 
 </script>
-
