@@ -52,7 +52,7 @@ class Database:
         self.cur.execute(drop_songs)
         self.cur.execute(create_songs)
         self.cur.execute(insert_songs)
-        #cur.execute(insert_votes)
+        self.cur.execute(insert_votes)
 
     def reboot(self):
         self.con.close()
@@ -63,7 +63,7 @@ class Database:
         self.cur.execute(drop_songs)
         self.cur.execute(create_songs)
         self.cur.execute(insert_songs)
-        #cur.execute(insert_votes)
+        self.cur.execute(insert_votes)
 
 
 
