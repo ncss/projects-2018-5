@@ -5,17 +5,17 @@ import sqlite3
 drop_votes = 'DROP TABLE IF EXISTS votes;'
 create_votes = '''
 CREATE TABLE votes (
-	song_id INTEGER,
-	vote TEXT
+    song_id INTEGER,
+    vote TEXT
 );
 '''
 drop_songs = 'DROP TABLE IF EXISTS songs;'
 create_songs = '''
 CREATE TABLE songs (
-	id INTEGER UNIQUE,
-	location TEXT,
-	title TEXT,
-	artist TEXT
+    id INTEGER UNIQUE,
+    location TEXT,
+    title TEXT,
+    artist TEXT
 );
 '''
 
@@ -65,8 +65,6 @@ class Database:
         self.cur.execute(insert_songs)
         self.cur.execute(insert_votes)
 
-
-
     @staticmethod
     def rand_music(musics):
         return random.choice(musics)
@@ -83,23 +81,35 @@ class Database:
     #def all_names(self):
         #return()#all names in the database
 
-
+db = Database()
+cur = db.cur
 class Person:
 
     def __init__(self):
-        self.name = "James" #get the current users username
-        self.good = []
-        self.bad = []
+        self.name = "Jimmy Neutron" #get the current users username
 
-
-    def name(self):
-        return(self.name)
+    def get_name(self):
+        return self.name
 
     def good(self): #returns list of songs a user likes
-        return(self.good)
+        rows = cur.execute("SELECT title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up'")
+        songs = []
+        for row in rows:
+            song = {}
+            song["title"] = row[0]
+            song["artist"] = row[1]
+            songs.append(song)
+        return songs
 
     def bad(self): #returns list of songs a user dislikes
-        return(self.bad)
+        rows = cur.execute("SELECT title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down'")
+        songs = []
+        for row in rows:
+            song = {}
+            song["title"] = row[0]
+            song["artist"] = row[1]
+            songs.append(song)
+        return songs
 
     #def add_song(self, vote):
         #if vote == "BAD":
@@ -118,10 +128,6 @@ class Song:
             self.location = location
 
 
-
-
-db = Database()
-cur = db.cur
 person = Person()
 
 def get_all_songs():
@@ -141,7 +147,7 @@ def vote(input):
         cur.execute('''INSERT INTO votes VALUES ({}, 'down');'''.format(input[1]))
     else:
         cur.execute('''INSERT INTO votes VALUES ({}, 'up');'''.format(input[1]))
-        
+
     up_votes = '''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
     cur.execute(up_votes)
     for row in cur:
@@ -149,7 +155,7 @@ def vote(input):
         location = row[1]
         name = row[2]
         artist = row[3]
-        person.good.append(Song(id,name,artist,location))
+        person.good().append(Song(id,name,artist,location))
 
     down_votes ='''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
     cur.execute(down_votes)
@@ -158,8 +164,9 @@ def vote(input):
         location = row[1]
         name = row[2]
         artist = row[3]
-        person.bad.append(Song(id,name,artist,location))
+        person.bad().append(Song(id,name,artist,location))
     return True #to be fixed with try catch block
+
 
 def get_person():
     return person

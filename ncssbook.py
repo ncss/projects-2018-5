@@ -23,7 +23,11 @@ def writeResponse(response, filename, context={}):
 
 
 def profile(response):
-    writeResponse(response, 'templates/profile.html', context={"person" : API.get_person()})
+    person = API.get_person()
+    liked = person.good()
+    disliked = person.bad()
+    name = person.get_name()
+    writeResponse(response, 'templates/profile.html', context={"liked" : liked, "disliked": disliked, "name": name})
 
 
 def home(response):
