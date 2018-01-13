@@ -1,26 +1,32 @@
 let filePath = '/static/mp3/'
 let songs;
-let songCount = 0
+let songCount = 0;
 let audio = document.getElementById('audioPlayer');
+let timeouts = []
 
 function playNextSnippet() {
-  console.log("")
+  for (var i = 0; i < timeouts.length; i++) {
+    clearTimeout(timeouts[i]);
+  }
+  timeouts = []
   let audio = document.getElementById('audioPlayer');
-  audio.currentTime = (audio.duration/2) - 5;
+  if (isFinite(audio.duration)){
+    audio.currentTime = (audio.duration/2) - 5;
+  }
   audio.play();
-  setTimeout(function(){
+  timeouts.push(setTimeout(function(){
     audio.pause();
-  },10000);
-  setTimeout(function(){
+  },10000));
+  timeouts.push(setTimeout(function(){
     nextSong();
-  },20000);
+  },20000));
 }
 
 function nextSong() {
   audio.pause();
   songCount += 1;
   let nextSong = songs[songCount];
-  updateAudioPath(nextSong.title);
+  updateValues(nextSong);
   if (audio.readyState >= 1) {
     playNextSnippet();
   } else {
@@ -28,21 +34,16 @@ function nextSong() {
   }
 }
 
-//To do!!!
-
-function updateAudioPath(songName) {
-  audio.src = filePath + songName + '.mp3';
+function updateAudioPath(filePath) {
+  console.log(filePath)
+  audio.src = filePath;
 }
 
-function updateArtist() {
-  return
+function updateValues(songJSON){
+  document.getElementById("musicTitle").innerHTML = songJSON.title;
+  document.getElementById("musicArtist").innerHTML = songJSON.artist;
+  updateAudioPath(songJSON.location);
 }
-
-function updateInfo(songJSON) {
-  updateAudioPath(songJSON.title);
-}
-
-//To do!!!
 
 function getSongs() {
   fetch('/songdb').then(function(response){
@@ -51,7 +52,7 @@ function getSongs() {
     songs = data;
   }).then(function() {
     let nextSong = songs[songCount];
-    updateAudioPath(nextSong.title);
+    updateValues(nextSong)
     let audio = document.getElementById('audioPlayer');
     if (audio.readyState >= 1) {
       playNextSnippet();
