@@ -167,7 +167,7 @@ def splitFile(fileLocation):
     with open(fileLocation) as file:
         fileBlob = file.read()
 
-    splitBlob(fileBlob)
+    return splitBlob(fileBlob)
 
 
 def splitBlob(blob):
