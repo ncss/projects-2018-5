@@ -16,7 +16,9 @@
       </div>
     </div>
     <div class="cover">
-      <img id="albumCover" src ="/static/images/acdc.jpg" alt="This will be Album Cover">
+      <div id='albumHolder'>
+        <img id="albumCover" src ="/static/images/acdc.jpg" alt="This will be Album Cover">
+      </div>
       <div id="bar">
         <div id="progressBar"></div>
       </div>
@@ -28,8 +30,8 @@
         <script src="/static/js/getsnippet.js"></script>
         <script src="/static/js/customprogressbar.js"></script>
       </div>
-      <button id="voteDown"><i class="material-icons">thumb_down</i></button>
-      <button id="voteUp"><i class="material-icons">thumb_up</i></button>
+      <button id="voteDown" class="down"><i class="material-icons down">thumb_down</i></button>
+      <button id="voteUp" class="up"><i class="material-icons up">thumb_up</i></button>
     </div>
     <div class="users_liked">
       <h2>Users Who Liked This:</h2>
@@ -45,10 +47,16 @@
     downButton = document.getElementById("voteDown");
     upButton = document.getElementById("voteUp");
     //downButton.addEventListener('onclick',animate);
-    downButton.addEventListener('onclick', sendVote(downButton))
-    upButton.addEventListener('onclick',sendVote(upButton))
-    function sendVote(button) {
-      vote = button.id == "voteUp" ? 1 : 0;
+    function sendVote(event) {
+      console.log(event.target.className)
+      let voteString = "";
+      if (event.target.className.startsWith("material-icons")) {
+        voteString = event.target.className.substr(event.target.className.indexOf(" ") + 1)
+      } else {
+        voteString = event.target.className
+      }
+      vote = voteString == "up" ? 1 : 0;
+      console.log(vote)
       fetch("/vote?user=0&song=" + (currentSongId) + "&vote=" + vote).then(
         (resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
@@ -66,4 +74,5 @@
       })
     }
   </script>
+  <script src="/static/js/swipe.js"></script>
 </body>
