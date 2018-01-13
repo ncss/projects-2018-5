@@ -45,13 +45,15 @@ def style(response):
 def about(response):
     writeResponse(response, 'templates/about.html')
 
+
 def songdb(response):
     out = []
 
     for music in API.get_all_songs():
-        out.append({"title" : music.title, "artist" : music.artist, "location" : music.location})
+        out.append({"title": music.title, "artist": music.artist, "location": music.location})
 
     response.write(json.dumps(out))
+
 
 def header(response):
     response.write('''
