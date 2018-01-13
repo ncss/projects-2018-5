@@ -15,7 +15,8 @@ CREATE TABLE songs (
     id INTEGER UNIQUE,
     location TEXT,
     title TEXT,
-    artist TEXT
+    artist TEXT,
+    album_cover TEXT
 );
 '''
 
@@ -121,11 +122,12 @@ class Person:
 
 
 class Song:
-        def __init__(self, id, name, artist, location):
+        def __init__(self, id, name, artist, location, cover):
             self.id = id
             self.title = name
             self.artist = artist
             self.location = location
+            self.cover = cover
 
 
 person = Person()
@@ -139,7 +141,8 @@ def get_all_songs():
         location = row[1]
         name = row[2]
         artist = row[3]
-        musics.append(Song(id,name,artist,location))
+        cover = row[4]
+        musics.append(Song(id,name,artist,location,cover))
     return musics
 
 def vote(input):
@@ -148,23 +151,25 @@ def vote(input):
     else:
         cur.execute('''INSERT INTO votes VALUES ({}, 'up');'''.format(input[1]))
 
-    up_votes = '''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
+    up_votes = '''SELECT id, location, title, artist, album_cover FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'up';'''
     cur.execute(up_votes)
     for row in cur:
         id = row[0]
         location = row[1]
         name = row[2]
         artist = row[3]
-        person.good().append(Song(id,name,artist,location))
+        cover = row[4]
+        person.good().append(Song(id,name,artist,location,cover))
 
-    down_votes ='''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
+    down_votes ='''SELECT id, location, title, artist, album_cover FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
     cur.execute(down_votes)
     for row in cur:
         id = row[0]
         location = row[1]
         name = row[2]
         artist = row[3]
-        person.bad().append(Song(id,name,artist,location))
+        cover = row[4]
+        person.bad().append(Song(id,name,artist,location,cover))
     return True #to be fixed with try catch block
 
 
