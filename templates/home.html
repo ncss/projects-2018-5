@@ -54,9 +54,10 @@
     upButton.onclick = function(){sendVote(upButton)};
     function sendVote(button) {
       vote = button.id == "voteUp" ? 1 : 0;
-      fetch("/vote?user=1&song=2&vote=" + vote)
+      fetch("/vote?user=0&song=2&vote=" + vote)
       .then((resp) => resp.json()).then(function(data) {
         // Do what you need to move to next song
+
         console.log(data)
         if (data["success"] == false) {
           alert("failed")
