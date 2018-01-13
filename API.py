@@ -155,7 +155,7 @@ def vote(input):
         location = row[1]
         name = row[2]
         artist = row[3]
-        person.good.append(Song(id,name,artist,location))
+        person.good().append(Song(id,name,artist,location))
 
     down_votes ='''SELECT id, location, title, artist FROM songs s JOIN votes v ON s.id=v.song_id WHERE v.vote = 'down';'''
     cur.execute(down_votes)
@@ -164,7 +164,7 @@ def vote(input):
         location = row[1]
         name = row[2]
         artist = row[3]
-        person.bad.append(Song(id,name,artist,location))
+        person.bad().append(Song(id,name,artist,location))
     return True #to be fixed with try catch block
 
 
