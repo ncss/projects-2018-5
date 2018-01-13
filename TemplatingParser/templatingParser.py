@@ -49,7 +49,8 @@ class IncNode(Node):
         with open("templates/" + self.filename) as myFile:
             for i in myFile:
                 textBlob += i
-        return textBlob
+
+            return textBlob
 
 
 class IfNode(Node):
@@ -162,6 +163,7 @@ class GroupNode(Node):
 def splitFile(fileLocation):
     fileBlob = ""
     tokenList = []
+
     with open(fileLocation) as file:
         fileBlob = file.read()
 
