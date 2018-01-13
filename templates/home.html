@@ -20,8 +20,8 @@
       <!-- <div id="progressBar">
         <div id="bar">Progress</div>
       </div> -->
-      <button><i class="material-icons">thumb_down</i></button>
-      <button><i class="material-icons">thumb_up</i></button>
+      <button><i class="material-icons" id="voteDown">thumb_down</i></button>
+      <button><i class="material-icons" id="voteUp">thumb_up</i></button>
     </div>
     <div id="audioPlayerDiv">
       <audio id="audioPlayer"
@@ -46,7 +46,7 @@
       </ul>
     </div>
   </div>
-  <!-- <script>
+   <script>
     downButton = document.getElementById("voteDown");
     upButton = document.getElementById("voteUp");
     downButton.onclick = function(){sendVote(downButton)};
@@ -63,6 +63,6 @@
         }
       })
     }
-  </script> -->
+  </script>
 </body>
 {% include footer.html %}
