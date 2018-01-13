@@ -1,20 +1,25 @@
 header {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
 }
 
 .header-logo {
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 1;
-  grid-column-end: 1;
+  display: flex;
 }
-
+.header-logo > img {
+  align-self: center;
+}
+.header-logo > h2 {
+  align-self: center; 
+}
 .header-user {
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 3;
-  grid-column-end: 4;
+  display: flex;
+}
+.header-user > img {
+  align-self: center;
+}
+.header-user > h2{
+  align-self: center;
 }
 
 .logo {
