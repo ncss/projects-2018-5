@@ -4,20 +4,22 @@ let songCount = 0;
 let audio = document.getElementById('audioPlayer');
 let albumCover = document.getElementById('albumCover');
 let timeouts = []
+let currentSongId = 0;
 
 function playNextSnippet() {
   for (var i = 0; i < timeouts.length; i++) {
     clearTimeout(timeouts[i]);
   }
-  timeouts = []
+  timeouts = [];
   let audio = document.getElementById('audioPlayer');
-  if (isFinite(audio.duration)){
+  if (isFinite(audio.duration)) {
     audio.currentTime = (audio.duration/2) - 5;
   }
   audio.play();
-  timeouts.push(setTimeout(function(){
+  seconds = 0;
+  timeouts.push(setTimeout(function() {
     playNextSnippet();
-  },10000));
+  }, 10000));
 }
 
 function nextSong() {
@@ -41,17 +43,26 @@ function updateAlbumCoverPath(filePath) {
 }
 
 function updateValues(songJSON){
-  document.getElementById("musicTitle").innerHTML = songJSON.title;
-  document.getElementById("musicArtist").innerHTML = songJSON.artist;
-  updateAudioPath(songJSON.location);
-  updateAlbumCoverPath(songJSON.coverlocation);
-  console.log(songJSON.coverlocation);
+  try {
+    document.getElementById("musicTitle").innerHTML = songJSON.title;
+    document.getElementById("musicArtist").innerHTML = songJSON.artist;
+    updateAudioPath(songJSON.location);
+    updateAlbumCoverPath(songJSON.coverlocation);
+    currentSongId = songJSON.id;
+  } catch(err) {
+    console.log('No more songs!!!');
+    noMoreSongs();
+  }
+}
+
+function noMoreSongs() {
+
 }
 
 function getSongs() {
-  fetch('/songdb').then(function(response){
-    return response.json()
-  }).then(function(data){
+  fetch('/songdb').then(function(response) {
+    return response.json();
+  }).then(function(data) {
     songs = data;
   }).then(function() {
     let nextSong = songs[songCount];
